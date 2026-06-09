@@ -45,7 +45,7 @@ export default function FAQSection() {
   };
 
   return (
-    <section className="relative min-h-screen py-24 px-6 bg-gradient-to-b from-amber-50 to-white">
+    <section className="relative min-h-screen py-24 px-6 bg-linear-to-b from-amber-50 to-white">
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -85,7 +85,7 @@ export default function FAQSection() {
                   animate={{ rotate: openIndex === index ? 180 : 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <ChevronDown className="w-5 h-5 text-amber-600 flex-shrink-0" />
+                  <ChevronDown className="w-5 h-5 text-amber-600 shrink-0" />
                 </motion.div>
               </button>
 

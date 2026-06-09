@@ -120,7 +120,7 @@ export default function ComparisonTool() {
   };
 
   return (
-    <section className="relative py-24 px-6 bg-gradient-to-b from-white to-amber-50">
+    <section className="relative py-24 px-6 bg-linear-to-b from-white to-amber-50">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -164,7 +164,7 @@ export default function ComparisonTool() {
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="bg-gradient-to-r from-amber-600 to-orange-600 text-white">
+                <tr className="bg-linear-to-r from-amber-600 to-orange-600 text-white">
                   <th className="px-6 py-4 text-left font-semibold">Minuman</th>
                   <th className="px-6 py-4 text-center font-semibold">Kafein (mg)</th>
                   <th className="px-6 py-4 text-center font-semibold">Porsi</th>
@@ -228,7 +228,7 @@ export default function ComparisonTool() {
                       initial={{ height: 0 }}
                       animate={{ height: `${height}%` }}
                       transition={{ duration: 0.8, delay: 0.2 }}
-                      className={`w-full ${drink.color} rounded-t-lg relative min-h-[20px]`}
+                      className={`w-full ${drink.color} rounded-t-lg relative min-h-5`}
                     >
                       <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-white px-2 py-1 rounded shadow text-sm font-bold text-gray-900 whitespace-nowrap">
                         {drink.caffeine}mg

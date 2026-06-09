@@ -26,7 +26,7 @@ export default function TipsSection() {
   ];
 
   return (
-    <section className="relative min-h-screen py-24 px-6 bg-gradient-to-b from-white to-amber-50">
+    <section className="relative min-h-screen py-24 px-6 bg-linear-to-b from-white to-amber-50">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -70,7 +70,7 @@ export default function TipsSection() {
                   transition={{ delay: index * 0.1 }}
                   className="flex items-start gap-3"
                 >
-                  <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-1" />
+                  <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0 mt-1" />
                   <span className="text-gray-700">{item}</span>
                 </motion.li>
               ))}
@@ -101,7 +101,7 @@ export default function TipsSection() {
                   transition={{ delay: index * 0.1 }}
                   className="flex items-start gap-3"
                 >
-                  <XCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-1" />
+                  <XCircle className="w-5 h-5 text-red-500 shrink-0 mt-1" />
                   <span className="text-gray-700">{item}</span>
                 </motion.li>
               ))}
@@ -114,7 +114,7 @@ export default function TipsSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-gradient-to-r from-orange-50 to-amber-50 border-2 border-amber-300 rounded-2xl p-8"
+          className="bg-linear-to-r from-orange-50 to-amber-50 border-2 border-amber-300 rounded-2xl p-8"
         >
           <div className="flex items-center gap-3 mb-6">
             <AlertTriangle className="w-8 h-8 text-amber-600" />
@@ -131,7 +131,7 @@ export default function TipsSection() {
                 transition={{ delay: index * 0.1 }}
                 className="flex items-start gap-3 bg-white/70 p-4 rounded-lg"
               >
-                <AlertTriangle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-1" />
+                <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-1" />
                 <span className="text-gray-700">{warning}</span>
               </motion.div>
             ))}

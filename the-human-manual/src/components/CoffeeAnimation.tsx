@@ -23,7 +23,7 @@ export default function CoffeeAnimation() {
       {[...Array(3)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-8 bg-gradient-to-t from-amber-300/60 to-transparent rounded-full blur-sm"
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-8 bg-linear-to-t from-amber-300/60 to-transparent rounded-full blur-sm"
           animate={{
             y: [-20, -60],
             opacity: [0.6, 0],

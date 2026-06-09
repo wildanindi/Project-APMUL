@@ -82,7 +82,7 @@ export default function BodyMap({ setActiveSection }: BodyMapProps) {
   }, [setActiveSection]);
 
   return (
-    <section id="body-map" ref={sectionRef} className="relative min-h-screen py-24 px-6 bg-gradient-to-b from-white to-amber-50 overflow-hidden">
+    <section id="body-map" ref={sectionRef} className="relative min-h-screen py-24 px-6 bg-linear-to-b from-white to-amber-50 overflow-hidden">
       {/* Background decorations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" />
@@ -116,7 +116,7 @@ export default function BodyMap({ setActiveSection }: BodyMapProps) {
             className="relative"
           >
             <div className="sticky top-24">
-              <div className="relative h-[700px] bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-3xl shadow-2xl p-8 overflow-hidden">
+              <div className="relative h-175 bg-linear-to-br from-slate-900 via-slate-800 to-slate-900 rounded-3xl shadow-2xl p-8 overflow-hidden">
                 {/* Grid background */}
                 <div className="absolute inset-0 opacity-10">
                   <div className="absolute inset-0" style={{
@@ -335,7 +335,7 @@ export default function BodyMap({ setActiveSection }: BodyMapProps) {
                       className={`absolute ${organ.position} z-20`}
                     >
                       <motion.div
-                        className={`relative bg-gradient-to-br ${organ.color} p-5 rounded-2xl shadow-2xl ${organ.glowColor} cursor-pointer`}
+                        className={`relative bg-linear-to-br ${organ.color} p-5 rounded-2xl shadow-2xl ${organ.glowColor} cursor-pointer`}
                         animate={
                           selectedOrgan === key || hoveredOrgan === key
                             ? {
@@ -413,7 +413,7 @@ export default function BodyMap({ setActiveSection }: BodyMapProps) {
                 <motion.div
                   animate={{ y: [0, 700, 0] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                  className="absolute left-0 right-0 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-30 pointer-events-none"
+                  className="absolute left-0 right-0 h-1 bg-linear-to-r from-transparent via-cyan-400 to-transparent opacity-30 pointer-events-none"
                 />
               </div>
             </div>
@@ -424,7 +424,7 @@ export default function BodyMap({ setActiveSection }: BodyMapProps) {
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="lg:min-h-[700px]"
+            className="lg:min-h-175"
           >
             <AnimatePresence mode="wait">
               {selectedOrgan ? (
@@ -440,7 +440,7 @@ export default function BodyMap({ setActiveSection }: BodyMapProps) {
                   <div className="flex items-start justify-between mb-8">
                     <div className="flex-1">
                       <div className="flex items-center gap-4 mb-3">
-                        <div className={`bg-gradient-to-br ${organs[selectedOrgan as keyof typeof organs].color} p-4 rounded-2xl shadow-lg`}>
+                        <div className={`bg-linear-to-br ${organs[selectedOrgan as keyof typeof organs].color} p-4 rounded-2xl shadow-lg`}>
                           {(() => {
                             const Icon = organs[selectedOrgan as keyof typeof organs].icon;
                             return <Icon className="w-10 h-10 text-white" />;
@@ -478,9 +478,9 @@ export default function BodyMap({ setActiveSection }: BodyMapProps) {
                           initial={{ opacity: 0, x: -20 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: index * 0.1 }}
-                          className="flex items-start gap-3 bg-gradient-to-r from-amber-50 to-transparent p-4 rounded-xl border-l-4 border-amber-400"
+                          className="flex items-start gap-3 bg-linear-to-r from-amber-50 to-transparent p-4 rounded-xl border-l-4 border-amber-400"
                         >
-                          <div className="flex-shrink-0 w-6 h-6 rounded-full bg-amber-400 flex items-center justify-center mt-0.5">
+                          <div className="shrink-0 w-6 h-6 rounded-full bg-amber-400 flex items-center justify-center mt-0.5">
                             <span className="text-white text-xs font-bold">{index + 1}</span>
                           </div>
                           <span className="text-gray-700 leading-relaxed">{effect}</span>
@@ -494,10 +494,10 @@ export default function BodyMap({ setActiveSection }: BodyMapProps) {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5 }}
-                    className={`bg-gradient-to-br ${organs[selectedOrgan as keyof typeof organs].color} p-6 rounded-2xl text-white shadow-xl`}
+                    className={`bg-linear-to-br ${organs[selectedOrgan as keyof typeof organs].color} p-6 rounded-2xl text-white shadow-xl`}
                   >
                     <div className="flex items-start gap-3">
-                      <div className="flex-shrink-0 text-2xl">⚠️</div>
+                      <div className="shrink-0 text-2xl">⚠️</div>
                       <div>
                         <p className="font-bold mb-2 text-lg">Perhatian Penting</p>
                         <p className="text-white/90 leading-relaxed">
@@ -524,7 +524,7 @@ export default function BodyMap({ setActiveSection }: BodyMapProps) {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="bg-gradient-to-br from-gray-50 to-amber-50 rounded-3xl shadow-2xl p-12 h-full flex items-center justify-center text-center border-2 border-dashed border-gray-300"
+                  className="bg-linear-to-br from-gray-50 to-amber-50 rounded-3xl shadow-2xl p-12 h-full flex items-center justify-center text-center border-2 border-dashed border-gray-300"
                 >
                   <div>
                     <motion.div
@@ -548,7 +548,7 @@ export default function BodyMap({ setActiveSection }: BodyMapProps) {
                         <button
                           key={key}
                           onClick={() => setSelectedOrgan(key)}
-                          className={`bg-gradient-to-r ${organ.color} text-white px-4 py-2 rounded-full text-sm font-semibold hover:scale-105 transition-transform shadow-lg`}
+                          className={`bg-linear-to-r ${organ.color} text-white px-4 py-2 rounded-full text-sm font-semibold hover:scale-105 transition-transform shadow-lg`}
                         >
                           {organ.name}
                         </button>

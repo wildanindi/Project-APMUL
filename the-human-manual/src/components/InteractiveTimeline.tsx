@@ -64,7 +64,7 @@ export default function InteractiveTimeline() {
     switch(type) {
       case 'drinking':
         return (
-          <div className="relative w-full h-full bg-gradient-to-br from-amber-100 to-amber-200 rounded-2xl flex items-center justify-center overflow-hidden">
+          <div className="relative w-full h-full bg-linear-to-br from-amber-100 to-amber-200 rounded-2xl flex items-center justify-center overflow-hidden">
             <svg viewBox="0 0 400 400" className="w-full h-full">
               {/* Person drinking coffee */}
               <g>
@@ -144,7 +144,7 @@ export default function InteractiveTimeline() {
 
       case 'bloodstream':
         return (
-          <div className="relative w-full h-full bg-gradient-to-br from-red-100 to-pink-200 rounded-2xl flex items-center justify-center overflow-hidden">
+          <div className="relative w-full h-full bg-linear-to-br from-red-100 to-pink-200 rounded-2xl flex items-center justify-center overflow-hidden">
             <svg viewBox="0 0 400 400" className="w-full h-full">
               {/* Blood vessel */}
               <g>
@@ -252,7 +252,7 @@ export default function InteractiveTimeline() {
 
       case 'brain':
         return (
-          <div className="relative w-full h-full bg-gradient-to-br from-purple-100 to-purple-200 rounded-2xl flex items-center justify-center overflow-hidden">
+          <div className="relative w-full h-full bg-linear-to-br from-purple-100 to-purple-200 rounded-2xl flex items-center justify-center overflow-hidden">
             <svg viewBox="0 0 400 400" className="w-full h-full">
               {/* Brain outline */}
               <g>
@@ -361,7 +361,7 @@ export default function InteractiveTimeline() {
 
       case 'metabolism':
         return (
-          <div className="relative w-full h-full bg-gradient-to-br from-blue-100 to-cyan-200 rounded-2xl flex items-center justify-center overflow-hidden">
+          <div className="relative w-full h-full bg-linear-to-br from-blue-100 to-cyan-200 rounded-2xl flex items-center justify-center overflow-hidden">
             <svg viewBox="0 0 400 400" className="w-full h-full">
               {/* Liver */}
               <g>
@@ -491,7 +491,7 @@ export default function InteractiveTimeline() {
 
       case 'elimination':
         return (
-          <div className="relative w-full h-full bg-gradient-to-br from-indigo-100 to-purple-200 rounded-2xl flex items-center justify-center overflow-hidden">
+          <div className="relative w-full h-full bg-linear-to-br from-indigo-100 to-purple-200 rounded-2xl flex items-center justify-center overflow-hidden">
             <svg viewBox="0 0 400 400" className="w-full h-full">
               {/* Person sleeping */}
               <g>
@@ -649,7 +649,7 @@ export default function InteractiveTimeline() {
                     }}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
-                    className="mt-4 inline-flex items-center gap-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg hover:shadow-xl transition-all"
+                    className="mt-4 inline-flex items-center gap-2 bg-linear-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg hover:shadow-xl transition-all"
                   >
                     <Play className="w-4 h-4" />
                     Lihat Ilustrasi
@@ -658,7 +658,7 @@ export default function InteractiveTimeline() {
               </div>
 
               {/* Icon */}
-              <div className="relative flex-shrink-0 z-10">
+              <div className="relative shrink-0 z-10">
                 <motion.div
                   whileHover={{ scale: 1.2, rotate: 5 }}
                   className={`${step.color} w-16 h-16 rounded-full flex items-center justify-center shadow-lg cursor-pointer`}
@@ -691,7 +691,7 @@ export default function InteractiveTimeline() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
-          className="mt-12 max-w-2xl mx-auto bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl p-8 shadow-xl"
+          className="mt-12 max-w-2xl mx-auto bg-linear-to-r from-amber-50 to-orange-50 rounded-2xl p-8 shadow-xl"
         >
           <div className="flex items-center gap-4 mb-6">
             <div className={`${timeline[activeStep].color} p-3 rounded-xl`}>
@@ -743,7 +743,7 @@ export default function InteractiveTimeline() {
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
-              <div className="bg-gradient-to-r from-purple-600 to-pink-600 p-6 text-white">
+              <div className="bg-linear-to-r from-purple-600 to-pink-600 p-6 text-white">
                 <div className="flex items-center justify-between">
                   <div>
                     <h3 className="text-2xl font-bold mb-1">{timeline[selectedVideo].title}</h3>
@@ -767,7 +767,7 @@ export default function InteractiveTimeline() {
                 </div>
 
                 {/* Description */}
-                <div className="mt-6 bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl p-6">
+                <div className="mt-6 bg-linear-to-r from-amber-50 to-orange-50 rounded-xl p-6">
                   <h4 className="font-bold text-gray-900 mb-3 text-lg">Penjelasan:</h4>
                   <p className="text-gray-700 leading-relaxed mb-4">
                     {timeline[selectedVideo].description}

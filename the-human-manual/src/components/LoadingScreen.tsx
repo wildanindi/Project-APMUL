@@ -12,7 +12,7 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
       animate={{ opacity: 0 }}
       transition={{ delay: 2.5, duration: 0.5 }}
       onAnimationComplete={onLoadingComplete}
-      className="fixed inset-0 z-[100] bg-gradient-to-br from-amber-600 via-orange-500 to-amber-700 flex items-center justify-center"
+      className="fixed inset-0 z-100 bg-linear-to-br from-amber-600 via-orange-500 to-amber-700 flex items-center justify-center"
     >
       <div className="text-center">
         {/* Animated Coffee Cup */}

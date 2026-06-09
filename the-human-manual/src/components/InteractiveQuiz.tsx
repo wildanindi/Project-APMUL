@@ -113,7 +113,7 @@ export default function InteractiveQuiz() {
   };
 
   return (
-    <section className="relative min-h-screen py-24 px-6 bg-gradient-to-b from-white to-purple-50">
+    <section className="relative min-h-screen py-24 px-6 bg-linear-to-b from-white to-purple-50">
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -264,7 +264,7 @@ export default function InteractiveQuiz() {
                 })()}
               </div>
 
-              <div className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl p-8 mb-8">
+              <div className="bg-linear-to-r from-purple-50 to-blue-50 rounded-xl p-8 mb-8">
                 <div className="text-6xl font-bold text-purple-600 mb-2">
                   {score}/{questions.length}
                 </div>
@@ -298,9 +298,9 @@ export default function InteractiveQuiz() {
                     >
                       <div className="flex items-start gap-2">
                         {userAnswers[idx] === q.correctAnswer ? (
-                          <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                          <CheckCircle className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
                         ) : (
-                          <XCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                          <XCircle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
                         )}
                         <div className="flex-1">
                           <p className="text-sm font-semibold text-gray-900">

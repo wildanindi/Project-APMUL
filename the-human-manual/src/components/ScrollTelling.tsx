@@ -79,7 +79,7 @@ export default function ScrollTelling({ setActiveSection }: ScrollTellingProps) 
               } items-center gap-12`}
             >
               {/* Icon */}
-              <div className="flex-shrink-0">
+              <div className="shrink-0">
                 <motion.div
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   className={`${step.color} p-8 rounded-3xl shadow-2xl`}

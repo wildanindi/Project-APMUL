@@ -75,7 +75,7 @@ export default function ResearchLab({ setActiveSection }: ResearchLabProps) {
   ];
 
   return (
-    <section id="research" ref={sectionRef} className="relative min-h-screen py-24 px-6 bg-gradient-to-b from-amber-50 to-white">
+    <section id="research" ref={sectionRef} className="relative min-h-screen py-24 px-6 bg-linear-to-b from-amber-50 to-white">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -173,7 +173,7 @@ export default function ResearchLab({ setActiveSection }: ResearchLabProps) {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-12 bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl p-8 border-2 border-amber-200"
+          className="mt-12 bg-linear-to-r from-amber-50 to-orange-50 rounded-2xl p-8 border-2 border-amber-200"
         >
           <h3 className="text-xl font-bold text-amber-900 mb-4">
             💡 Tips untuk Mahasiswa Kesehatan

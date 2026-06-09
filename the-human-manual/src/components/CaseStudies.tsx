@@ -319,7 +319,7 @@ export default function CaseStudies({ setActiveSection }: CaseStudiesProps) {
   const currentFilteredIndex = filteredCases.indexOf(currentCase);
 
   return (
-    <section id="cases" ref={sectionRef} className="relative py-24 px-6 bg-gradient-to-b from-amber-50 to-white overflow-hidden">
+    <section id="cases" ref={sectionRef} className="relative py-24 px-6 bg-linear-to-b from-amber-50 to-white overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 right-10 w-96 h-96 bg-amber-100 rounded-full opacity-30 blur-3xl" />
@@ -383,7 +383,7 @@ export default function CaseStudies({ setActiveSection }: CaseStudiesProps) {
                   {filteredCases.length} Kasus
                 </h3>
               </div>
-              <div className="max-h-[600px] overflow-y-auto">
+              <div className="max-h-150 overflow-y-auto">
                 {filteredCases.map((caseItem) => {
                   const idx = cases.indexOf(caseItem);
                   const isActive = activeCase === idx;
@@ -397,7 +397,7 @@ export default function CaseStudies({ setActiveSection }: CaseStudiesProps) {
                       }`}
                     >
                       <div className="flex items-start gap-3">
-                        <div className={`p-2 rounded-lg bg-gradient-to-br ${caseItem.color} flex-shrink-0`}>
+                        <div className={`p-2 rounded-lg bg-linear-to-br ${caseItem.color} shrink-0`}>
                           <caseItem.icon className="w-4 h-4 text-white" />
                         </div>
                         <div className="flex-1 min-w-0">
@@ -406,7 +406,7 @@ export default function CaseStudies({ setActiveSection }: CaseStudiesProps) {
                               {caseItem.title}
                             </span>
                             {isDone && (
-                              <CheckCircle className="w-3.5 h-3.5 text-green-500 flex-shrink-0" />
+                              <CheckCircle className="w-3.5 h-3.5 text-green-500 shrink-0" />
                             )}
                           </div>
                           <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${caseItem.categoryColor}`}>
@@ -434,7 +434,7 @@ export default function CaseStudies({ setActiveSection }: CaseStudiesProps) {
                 className="bg-white rounded-2xl shadow-xl overflow-hidden"
               >
                 {/* Header */}
-                <div className={`bg-gradient-to-r ${currentCase.color} p-8 text-white`}>
+                <div className={`bg-linear-to-r ${currentCase.color} p-8 text-white`}>
                   <div className="flex items-start gap-4">
                     <div className="p-3 bg-white/20 rounded-xl">
                       <currentCase.icon className="w-8 h-8" />
@@ -506,7 +506,7 @@ export default function CaseStudies({ setActiveSection }: CaseStudiesProps) {
                             className={cls}
                           >
                             <div className="flex items-center gap-3">
-                              <span className={`w-6 h-6 rounded-full border-2 flex-shrink-0 flex items-center justify-center text-xs font-bold ${
+                              <span className={`w-6 h-6 rounded-full border-2 shrink-0 flex items-center justify-center text-xs font-bold ${
                                 !showResult
                                   ? isSelected ? "border-amber-500 bg-amber-500 text-white" : "border-gray-300 text-gray-400"
                                   : isCorrect ? "border-green-500 bg-green-500 text-white"
@@ -516,8 +516,8 @@ export default function CaseStudies({ setActiveSection }: CaseStudiesProps) {
                                 {String.fromCharCode(65 + index)}
                               </span>
                               <span className="text-gray-800 flex-1">{option}</span>
-                              {showResult && isCorrect && <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />}
-                              {showResult && isSelected && !isCorrect && <XCircle className="w-5 h-5 text-red-400 flex-shrink-0" />}
+                              {showResult && isCorrect && <CheckCircle className="w-5 h-5 text-green-500 shrink-0" />}
+                              {showResult && isSelected && !isCorrect && <XCircle className="w-5 h-5 text-red-400 shrink-0" />}
                             </div>
                           </button>
                         );

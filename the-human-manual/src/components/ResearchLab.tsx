@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
-import { FlaskConical, BookOpen, ExternalLink, Microscope, GraduationCap } from 'lucide-react';
+import { FlaskConical, BookOpen, ExternalLink, Microscope, GraduationCap, Beaker, FileText, Link as LinkIcon } from 'lucide-react';
 
 interface ResearchLabProps {
   setActiveSection: (section: string) => void;
@@ -30,28 +30,52 @@ export default function ResearchLab({ setActiveSection }: ResearchLabProps) {
 
   const resources = [
     {
-      icon: BookOpen,
-      title: "Farmakologi Kafein",
-      description: "Mekanisme molekular kafein sebagai antagonis reseptor adenosin A1 dan A2A di sistem saraf pusat",
-      source: "PubMed Central",
-      color: "bg-blue-500",
-      link: "#"
+      title: 'Farmakologi Kafein',
+      description: 'Mekanisme kerja kafein sebagai antagonis reseptor adenosin dan efeknya pada sistem saraf pusat',
+      icon: Beaker,
+      color: 'from-blue-500 to-cyan-500',
+      topics: ['Adenosin', 'Reseptor A1 & A2A', 'Dopamin', 'Norepinefrin'],
+      url: 'https://pubmed.ncbi.nlm.nih.gov/20164566/'
     },
     {
-      icon: Microscope,
-      title: "Genetika & Metabolisme",
-      description: "Peran polimorfisme gen CYP1A2 dalam variasi individual metabolisme kafein",
-      source: "Nature Genetics",
-      color: "bg-purple-500",
-      link: "#"
-    },
-    {
+      title: 'Metabolisme CYP1A2',
+      description: 'Peran genetik dalam metabolisme kafein dan variasi individual dalam toleransi kafein',
       icon: GraduationCap,
-      title: "Efek Kardiovaskular",
-      description: "Dampak konsumsi kafein jangka pendek dan panjang terhadap sistem kardiovaskular",
-      source: "Journal of the American College of Cardiology",
-      color: "bg-red-500",
-      link: "#"
+      color: 'from-purple-500 to-pink-500',
+      topics: ['CYP1A2', 'Polimorfisme Genetik', 'Fast/Slow Metabolizer'],
+      url: 'https://pubmed.ncbi.nlm.nih.gov/16522833/'
+    },
+    {
+      title: 'Efek Kardiovaskular',
+      description: 'Dampak konsumsi kafein pada sistem kardiovaskular termasuk tekanan darah dan detak jantung',
+      icon: BookOpen,
+      color: 'from-red-500 to-orange-500',
+      topics: ['Tekanan Darah', 'Takikardia', 'Vasokonstriktor', 'Aritmia'],
+      url: 'https://pubmed.ncbi.nlm.nih.gov/29727249/'
+    },
+    {
+      title: 'Toleransi & Dependensi',
+      description: 'Mekanisme neuroadaptasi yang menyebabkan toleransi kafein dan gejala withdrawal',
+      icon: FileText,
+      color: 'from-green-500 to-teal-500',
+      topics: ['Upregulasi Reseptor', 'Toleransi', 'Withdrawal', 'Dependensi'],
+      url: 'https://pubmed.ncbi.nlm.nih.gov/30372764/'
+    },
+    {
+      title: 'Farmakokinetik Kafein',
+      description: 'Absorpsi, distribusi, metabolisme, dan ekskresi kafein dalam tubuh manusia',
+      icon: LinkIcon,
+      color: 'from-amber-500 to-yellow-500',
+      topics: ['Absorpsi GI', 'Half-life', 'Distribusi', 'Metabolit'],
+      url: 'https://pubmed.ncbi.nlm.nih.gov/29801541/'
+    },
+    {
+      title: 'Dosis Aman & Toksisitas',
+      description: 'Pedoman konsumsi kafein yang aman dan tanda-tanda overdosis kafein',
+      icon: Beaker,
+      color: 'from-indigo-500 to-purple-500',
+      topics: ['LD50', 'Dosis Terapeutik', 'Toksisitas Akut', 'Batas Aman'],
+      url: 'https://pubmed.ncbi.nlm.nih.gov/26522129/'
     }
   ];
 
@@ -101,21 +125,29 @@ export default function ResearchLab({ setActiveSection }: ResearchLabProps) {
             Sumber Riset Terpercaya
           </h3>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {resources.map((resource, index) => (
               <motion.a
                 key={index}
-                href={resource.link}
+                href={resource.url}
+                target="_blank"
+                rel="noopener noreferrer"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -5 }}
-                className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all cursor-pointer group"
+                transition={{ delay: index * 0.1, duration: 0.5 }}
+                whileHover={{ y: -8, boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)' }}
+                className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all cursor-pointer group relative"
               >
-                <div className={`${resource.color} p-6 text-white`}>
-                  <resource.icon className="w-10 h-10 mb-3" />
-                  <h4 className="font-bold text-lg">{resource.title}</h4>
+                <div className={`bg-gradient-to-br ${resource.color} p-6 text-white relative overflow-hidden`}>
+                  <div className="absolute inset-0 opacity-10" style={{
+                    backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(255,255,255,0.8) 1px, transparent 1px)',
+                    backgroundSize: '50px 50px'
+                  }} />
+                  <div className="relative z-10">
+                    <resource.icon className="w-10 h-10 mb-3 group-hover:scale-110 transition-transform" />
+                    <h4 className="font-bold text-lg leading-tight">{resource.title}</h4>
+                  </div>
                 </div>
 
                 <div className="p-6">
@@ -123,9 +155,31 @@ export default function ResearchLab({ setActiveSection }: ResearchLabProps) {
                     {resource.description}
                   </p>
 
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs text-gray-500">{resource.source}</span>
-                    <ExternalLink className="w-4 h-4 text-amber-600 group-hover:translate-x-1 transition-transform" />
+                  {/* Topics */}
+                  <div className="mb-4 space-y-2">
+                    <div className="flex flex-wrap gap-2">
+                      {resource.topics.map((topic, idx) => (
+                        <motion.span
+                          key={idx}
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: index * 0.1 + idx * 0.05 }}
+                          className="inline-block bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 px-2.5 py-1 rounded-full text-xs font-semibold border border-amber-200 hover:border-amber-400 transition-colors"
+                        >
+                          {topic}
+                        </motion.span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between pt-4 border-t border-gray-200">
+                    <span className="text-xs text-gray-500 font-medium">PubMed Central</span>
+                    <motion.div
+                      animate={{ x: [0, 3, 0] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    >
+                      <ExternalLink className="w-4 h-4 text-amber-600 group-hover:text-amber-700 transition-colors" />
+                    </motion.div>
                   </div>
                 </div>
               </motion.a>

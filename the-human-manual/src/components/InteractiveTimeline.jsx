@@ -58,6 +58,7 @@ export default function InteractiveTimeline() {
   const handlePlayVideo = (index) => {
     setSelectedVideo(index);
     setShowVideo(true);
+    setActiveStep(index);
   };
 
   const renderIllustration = (type) => {
@@ -187,110 +188,16 @@ export default function InteractiveTimeline() {
 
       case 'brain':
         return (
-          <div className="relative w-full h-full bg-linear-to-br from-purple-100 to-purple-200 rounded-2xl flex items-center justify-center overflow-hidden">
-            <svg viewBox="0 0 400 400" className="w-full h-full">
-              {/* Brain outline */}
-              <g>
-                <path
-                  d="M 200 100 Q 250 90 280 120 Q 290 150 280 180 Q 270 210 240 230 Q 220 240 200 240 Q 180 240 160 230 Q 130 210 120 180 Q 110 150 120 120 Q 150 90 200 100 Z"
-                  fill="#A78BFA"
-                  opacity="0.6"
-                  stroke="#7C3AED"
-                  strokeWidth="3"
-                />
-
-                {/* Brain folds */}
-                <path d="M 170 120 Q 180 130 170 140" stroke="#7C3AED" strokeWidth="2" fill="none" />
-                <path d="M 190 115 Q 200 125 190 135" stroke="#7C3AED" strokeWidth="2" fill="none" />
-                <path d="M 210 115 Q 220 125 210 135" stroke="#7C3AED" strokeWidth="2" fill="none" />
-                <path d="M 230 120 Q 240 130 230 140" stroke="#7C3AED" strokeWidth="2" fill="none" />
-                <path d="M 170 155 Q 180 165 170 175" stroke="#7C3AED" strokeWidth="2" fill="none" />
-                <path d="M 230 155 Q 240 165 230 175" stroke="#7C3AED" strokeWidth="2" fill="none" />
-
-                {/* Adenosine receptors (blocked) */}
-                {[...Array(6)].map((_, i) => (
-                  <g key={`receptor-${i}`}>
-                    <motion.circle
-                      cx={150 + (i % 3) * 50}
-                      cy={140 + Math.floor(i / 3) * 50}
-                      r="15"
-                      fill="#E0E7FF"
-                      stroke="#6366F1"
-                      strokeWidth="2"
-                      animate={{
-                        scale: [1, 1.1, 1]
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        delay: i * 0.2
-                      }}
-                    />
-                    {/* Caffeine molecule blocking */}
-                    <motion.circle
-                      cx={150 + (i % 3) * 50}
-                      cy={140 + Math.floor(i / 3) * 50}
-                      r="8"
-                      fill="#D97706"
-                      animate={{
-                        y: [-20, 0],
-                        opacity: [0, 1]
-                      }}
-                      transition={{
-                        duration: 1.5,
-                        repeat: Infinity,
-                        delay: i * 0.3
-                      }}
-                    />
-                  </g>
-                ))}
-
-                {/* Electric signals */}
-                {[...Array(4)].map((_, i) => (
-                  <motion.path
-                    key={`signal-${i}`}
-                    d={`M ${150 + i * 30} 180 L ${160 + i * 30} 200 L ${150 + i * 30} 220`}
-                    stroke="#FBBF24"
-                    strokeWidth="3"
-                    fill="none"
-                    animate={{
-                      opacity: [0, 1, 0],
-                      pathLength: [0, 1, 0]
-                    }}
-                    transition={{
-                      duration: 1.5,
-                      repeat: Infinity,
-                      delay: i * 0.3
-                    }}
-                  />
-                ))}
-
-                {/* Sparkles for heightened awareness */}
-                {[...Array(8)].map((_, i) => (
-                  <motion.circle
-                    key={`sparkle-${i}`}
-                    cx={140 + Math.random() * 120}
-                    cy={110 + Math.random() * 120}
-                    r="3"
-                    fill="#FCD34D"
-                    animate={{
-                      opacity: [0, 1, 0],
-                      scale: [0, 1, 0]
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      delay: i * 0.25
-                    }}
-                  />
-                ))}
-              </g>
-
-              {/* Text labels */}
-              <text x="200" y="280" textAnchor="middle" fill="#7C3AED" fontSize="14" fontWeight="bold">
-                Reseptor Adenosin Terblokir
-              </text>
-            </svg>
+          <div className="relative w-full h-full bg-purple-50 flex items-center justify-center overflow-hidden">
+            <video
+              src="/video/Video 3 (efek puncak).mp4"
+              controls
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-cover"
+            />
           </div>
         );
 

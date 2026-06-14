@@ -125,107 +125,16 @@ export default function InteractiveTimeline() {
 
       case 'elimination':
         return (
-          <div className="relative w-full h-full bg-linear-to-br from-indigo-100 to-purple-200 rounded-2xl flex items-center justify-center overflow-hidden">
-            <svg viewBox="0 0 400 400" className="w-full h-full">
-              {/* Person sleeping */}
-              <g>
-                {/* Head */}
-                <ellipse cx="180" cy="200" rx="40" ry="35" fill="#FED7AA" />
-                {/* Body */}
-                <rect x="210" y="190" width="100" height="40" rx="20" fill="#6366F1" />
-                {/* Pillow */}
-                <ellipse cx="200" cy="220" rx="60" ry="25" fill="#E0E7FF" />
-
-                {/* ZZZ */}
-                {[...Array(3)].map((_, i) => (
-                  <motion.text
-                    key={`z-${i}`}
-                    x={250 + i * 15}
-                    y={150 - i * 20}
-                    fill="#6366F1"
-                    fontSize={24 - i * 4}
-                    fontWeight="bold"
-                    animate={{
-                      opacity: [0, 1, 0],
-                      y: [-5, -15]
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      delay: i * 0.3
-                    }}
-                  >
-                    Z
-                  </motion.text>
-                ))}
-
-                {/* Moon */}
-                <g>
-                  <circle cx="320" cy="100" r="30" fill="#FCD34D" />
-                  <circle cx="330" cy="95" r="25" fill="#E0E7FF" />
-                  {/* Stars */}
-                  {[...Array(5)].map((_, i) => (
-                    <motion.g
-                      key={`star-${i}`}
-                      animate={{
-                        opacity: [0.3, 1, 0.3]
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        delay: i * 0.4
-                      }}
-                    >
-                      <circle
-                        cx={280 + Math.random() * 80}
-                        cy={60 + Math.random() * 80}
-                        r="2"
-                        fill="#FCD34D"
-                      />
-                    </motion.g>
-                  ))}
-                </g>
-
-                {/* Caffeine molecules leaving */}
-                {[...Array(6)].map((_, i) => (
-                  <motion.circle
-                    key={`leaving-${i}`}
-                    cx={200}
-                    cy={230}
-                    r="5"
-                    fill="#D97706"
-                    animate={{
-                      opacity: [1, 0],
-                      y: [0, 80],
-                      x: [(i - 3) * 10, (i - 3) * 20]
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      delay: i * 0.5
-                    }}
-                  />
-                ))}
-              </g>
-
-              {/* Calm brain indicator */}
-              <motion.g
-                animate={{
-                  opacity: [0.5, 1, 0.5]
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity
-                }}
-              >
-                <circle cx="100" cy="120" r="40" fill="#A78BFA" opacity="0.3" />
-                <text x="100" y="130" textAnchor="middle" fontSize="36">😴</text>
-              </motion.g>
-
-              <text x="200" y="320" textAnchor="middle" fill="#4C1D95" fontSize="14" fontWeight="bold">
-                Tubuh Kembali Normal
-              </text>
-            </svg>
+          <div className="relative w-full h-full bg-indigo-50 flex items-center justify-center overflow-hidden">
+            <video
+              src="/video/video 5 (kafein eliminasi).mp4"
+              controls
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-cover"
+            />
           </div>
         );
 

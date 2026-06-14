@@ -1,13 +1,9 @@
 import { useEffect, useRef } from 'react';
-import { motion, useScroll, useTransform } from 'motion/react';
+import { motion, useScroll } from 'motion/react';
 import { Brain, Zap, Activity, Clock } from 'lucide-react';
 
-interface ScrollTellingProps {
-  setActiveSection: (section: string) => void;
-}
-
-export default function ScrollTelling({ setActiveSection }: ScrollTellingProps) {
-  const sectionRef = useRef<HTMLDivElement>(null);
+export default function ScrollTelling({ setActiveSection }) {
+  const sectionRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"]
@@ -50,23 +46,23 @@ export default function ScrollTelling({ setActiveSection }: ScrollTellingProps) 
   ];
 
   return (
-    <section id="how-it-works" ref={sectionRef} className="relative min-h-screen py-24 px-6">
+    <section id="how-it-works" ref={sectionRef} className="relative min-h-screen py-16 sm:py-24 px-4 sm:px-6">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-20"
+          className="text-center mb-12 sm:mb-20"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-amber-900 mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-amber-900 mb-3 sm:mb-4">
             Bagaimana Kafein Bekerja?
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
             Mari kita ikuti perjalanan molekul kafein dari secangkir kopi hingga ke otak Anda
           </p>
         </motion.div>
 
-        <div className="space-y-32">
+        <div className="space-y-16 sm:space-y-32">
           {steps.map((step, index) => (
             <motion.div
               key={index}
@@ -76,15 +72,15 @@ export default function ScrollTelling({ setActiveSection }: ScrollTellingProps) 
               transition={{ duration: 0.6 }}
               className={`flex flex-col ${
                 index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-              } items-center gap-12`}
+              } items-center gap-6 sm:gap-8 md:gap-12`}
             >
               {/* Icon */}
-              <div className="shrink-0">
+              <div className="shrink-0 w-full sm:w-auto flex justify-center">
                 <motion.div
                   whileHover={{ scale: 1.1, rotate: 5 }}
-                  className={`${step.color} p-8 rounded-3xl shadow-2xl`}
+                  className={`${step.color} p-6 sm:p-8 rounded-3xl shadow-2xl`}
                 >
-                  <step.icon className="w-24 h-24 text-white" />
+                  <step.icon className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 text-white" />
                 </motion.div>
               </div>
 
@@ -95,17 +91,17 @@ export default function ScrollTelling({ setActiveSection }: ScrollTellingProps) 
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.2 }}
-                  className="bg-white rounded-2xl p-8 shadow-xl"
+                  className="bg-white rounded-2xl p-4 sm:p-6 md:p-8 shadow-xl"
                 >
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="text-4xl font-bold text-amber-700">
+                  <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+                    <span className="text-3xl sm:text-4xl font-bold text-amber-700">
                       {String(index + 1).padStart(2, '0')}
                     </span>
-                    <h3 className="text-2xl font-bold text-gray-900">
+                    <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900">
                       {step.title}
                     </h3>
                   </div>
-                  <p className="text-lg text-gray-600 leading-relaxed">
+                  <p className="text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed">
                     {step.description}
                   </p>
                 </motion.div>

@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 import { Coffee, Droplet, Wine, Leaf } from 'lucide-react';
 
 export default function ComparisonTool() {
-  const [selectedDrinks, setSelectedDrinks] = useState<string[]>(['espresso', 'teh-hijau']);
+  const [selectedDrinks, setSelectedDrinks] = useState(['espresso', 'teh-hijau']);
 
   const drinks = {
     'espresso': {
@@ -107,7 +107,7 @@ export default function ComparisonTool() {
     },
   };
 
-  const toggleDrink = (drinkId: string) => {
+  const toggleDrink = (drinkId) => {
     if (selectedDrinks.includes(drinkId)) {
       if (selectedDrinks.length > 1) {
         setSelectedDrinks(selectedDrinks.filter(d => d !== drinkId));
@@ -120,34 +120,34 @@ export default function ComparisonTool() {
   };
 
   return (
-    <section className="relative py-24 px-6 bg-linear-to-b from-white to-amber-50">
+    <section className="relative py-16 sm:py-24 px-4 sm:px-6 bg-linear-to-b from-white to-amber-50">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-8 sm:mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-amber-900 mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-amber-900 mb-3 sm:mb-4">
             Perbandingan Kandungan Kafein
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-2">
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-1 sm:mb-2">
             Bandingkan kadar kafein berbagai minuman populer
           </p>
-          <p className="text-sm text-gray-500">
+          <p className="text-xs sm:text-sm text-gray-500">
             Pilih hingga 4 minuman untuk dibandingkan
           </p>
         </motion.div>
 
         {/* Drink Selection */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 mb-12">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-3 mb-8 sm:mb-12">
           {Object.entries(drinks).map(([id, drink]) => (
             <motion.button
               key={id}
               onClick={() => toggleDrink(id)}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className={`p-4 rounded-xl border-2 transition-all ${
+              className={`p-2 sm:p-4 rounded-xl border-2 transition-all text-xs sm:text-sm ${
                 selectedDrinks.includes(id)
                   ? `${drink.color} text-white border-transparent shadow-lg`
                   : 'bg-white text-gray-700 border-gray-200 hover:border-amber-400'
@@ -174,7 +174,7 @@ export default function ComparisonTool() {
               </thead>
               <tbody>
                 {selectedDrinks.map((drinkId, index) => {
-                  const drink = drinks[drinkId as keyof typeof drinks];
+                  const drink = drinks[drinkId];
                   return (
                     <motion.tr
                       key={drinkId}
@@ -218,8 +218,8 @@ export default function ComparisonTool() {
             <h4 className="font-semibold text-gray-900 mb-4 text-center">Perbandingan Visual</h4>
             <div className="flex items-end justify-around gap-4 h-48">
               {selectedDrinks.map(drinkId => {
-                const drink = drinks[drinkId as keyof typeof drinks];
-                const maxCaffeine = Math.max(...selectedDrinks.map(id => drinks[id as keyof typeof drinks].caffeine));
+                const drink = drinks[drinkId];
+                const maxCaffeine = Math.max(...selectedDrinks.map(id => drinks[id].caffeine));
                 const height = (drink.caffeine / maxCaffeine) * 100;
 
                 return (

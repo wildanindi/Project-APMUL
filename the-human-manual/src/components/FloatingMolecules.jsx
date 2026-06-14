@@ -1,14 +1,15 @@
 import { motion } from 'motion/react';
 
+const molecules = Array.from({ length: 15 }, (_, i) => ({
+  id: i,
+  size: Math.random() * 40 + 20,
+  x: Math.random() * 100,
+  y: Math.random() * 100,
+  duration: Math.random() * 10 + 10,
+  delay: Math.random() * 5,
+}));
+
 export default function FloatingMolecules() {
-  const molecules = Array.from({ length: 15 }, (_, i) => ({
-    id: i,
-    size: Math.random() * 40 + 20,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    duration: Math.random() * 10 + 10,
-    delay: Math.random() * 5,
-  }));
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">

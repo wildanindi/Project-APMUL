@@ -4,11 +4,11 @@ import { Brain, Trophy, RotateCcw, CheckCircle, XCircle } from 'lucide-react';
 
 export default function InteractiveQuiz() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [showResult, setShowResult] = useState(false);
   const [score, setScore] = useState(0);
   const [quizCompleted, setQuizCompleted] = useState(false);
-  const [userAnswers, setUserAnswers] = useState<number[]>([]);
+  const [userAnswers, setUserAnswers] = useState([]);
 
   const questions = [
     {
@@ -71,7 +71,7 @@ export default function InteractiveQuiz() {
     },
   ];
 
-  const handleAnswer = (answerIndex: number) => {
+  const handleAnswer = (answerIndex) => {
     if (selectedAnswer !== null) return;
 
     setSelectedAnswer(answerIndex);
@@ -113,21 +113,21 @@ export default function InteractiveQuiz() {
   };
 
   return (
-    <section className="relative min-h-screen py-24 px-6 bg-linear-to-b from-white to-purple-50">
+    <section className="relative min-h-screen py-16 sm:py-24 px-4 sm:px-6 bg-linear-to-b from-white to-purple-50">
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-16"
         >
           <div className="inline-block mb-4">
-            <Brain className="w-16 h-16 text-purple-600 mx-auto" />
+            <Brain className="w-10 h-10 sm:w-16 sm:h-16 text-purple-600 mx-auto" />
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-amber-900 mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-amber-900 mb-3 sm:mb-4">
             Uji Pengetahuan Anda
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
             Quiz interaktif untuk menguji pemahaman Anda tentang kafein
           </p>
         </motion.div>
@@ -142,12 +142,12 @@ export default function InteractiveQuiz() {
               className="bg-white rounded-2xl shadow-2xl overflow-hidden"
             >
               {/* Progress */}
-              <div className="bg-purple-600 p-6 text-white">
-                <div className="flex justify-between items-center mb-4">
-                  <span className="text-sm font-semibold">
+              <div className="bg-purple-600 p-4 sm:p-6 text-white">
+                <div className="flex justify-between items-center mb-3 sm:mb-4">
+                  <span className="text-xs sm:text-sm font-semibold">
                     Pertanyaan {currentQuestion + 1} dari {questions.length}
                   </span>
-                  <span className="text-sm">
+                  <span className="text-xs sm:text-sm">
                     Skor: {score}/{currentQuestion + (showResult ? 1 : 0)}
                   </span>
                 </div>
@@ -162,17 +162,17 @@ export default function InteractiveQuiz() {
               </div>
 
               {/* Question */}
-              <div className="p-8">
-                <h3 className="text-2xl font-bold text-gray-900 mb-8">
+              <div className="p-4 sm:p-8">
+                <h3 className="text-lg sm:text-2xl font-bold text-gray-900 mb-6 sm:mb-8">
                   {questions[currentQuestion].question}
                 </h3>
 
-                <div className="space-y-4 mb-8">
+                <div className="space-y-2 sm:space-y-4 mb-6 sm:mb-8">
                   {questions[currentQuestion].options.map((option, index) => {
                     const isCorrect = index === questions[currentQuestion].correctAnswer;
                     const isSelected = selectedAnswer === index;
 
-                    let buttonClass = 'w-full text-left p-5 rounded-xl border-2 transition-all font-medium ';
+                    let buttonClass = 'w-full text-left p-3 sm:p-5 rounded-xl border-2 transition-all font-medium text-sm sm:text-base ';
 
                     if (!showResult) {
                       buttonClass += 'border-gray-200 hover:border-purple-400 hover:bg-purple-50';

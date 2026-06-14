@@ -42,7 +42,7 @@ export default function App() {
             {/* Urutan Cerita (The Scrollytelling Flow) */}
             <HeroSection />
 
-            <div className="py-12 bg-white relative z-10">
+            <div className="py-8 sm:py-12 bg-white relative z-10">
               <QuickFacts />
             </div>
 

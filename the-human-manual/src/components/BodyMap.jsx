@@ -2,14 +2,10 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Brain, Heart, Utensils, X, Sparkles } from 'lucide-react';
 
-interface BodyMapProps {
-  setActiveSection: (section: string) => void;
-}
-
-export default function BodyMap({ setActiveSection }: BodyMapProps) {
-  const [selectedOrgan, setSelectedOrgan] = useState<string | null>(null);
-  const [hoveredOrgan, setHoveredOrgan] = useState<string | null>(null);
-  const sectionRef = useRef<HTMLDivElement>(null);
+export default function BodyMap({ setActiveSection }) {
+  const [selectedOrgan, setSelectedOrgan] = useState(null);
+  const [hoveredOrgan, setHoveredOrgan] = useState(null);
+  const sectionRef = useRef(null);
 
   const organs = {
     brain: {
@@ -82,11 +78,11 @@ export default function BodyMap({ setActiveSection }: BodyMapProps) {
   }, [setActiveSection]);
 
   return (
-    <section id="body-map" ref={sectionRef} className="relative min-h-screen py-24 px-6 bg-linear-to-b from-white to-amber-50 overflow-hidden">
+    <section id="body-map" ref={sectionRef} className="relative min-h-screen py-16 sm:py-24 px-4 sm:px-6 bg-linear-to-b from-white to-amber-50 overflow-hidden">
       {/* Background decorations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" />
-        <div className="absolute bottom-20 right-10 w-72 h-72 bg-amber-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-10 sm:top-20 left-5 sm:left-10 w-40 h-40 sm:w-72 sm:h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" />
+        <div className="absolute bottom-10 sm:bottom-20 right-5 sm:right-10 w-40 h-40 sm:w-72 sm:h-72 bg-amber-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '1s' }} />
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
@@ -94,20 +90,20 @@ export default function BodyMap({ setActiveSection }: BodyMapProps) {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-16"
         >
           <div className="inline-block mb-4">
-            <Sparkles className="w-12 h-12 text-amber-600 mx-auto" />
+            <Sparkles className="w-10 h-10 sm:w-12 sm:h-12 text-amber-600 mx-auto" />
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-amber-900 mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-amber-900 mb-3 sm:mb-4">
             Peta Tubuh Interaktif
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
             Klik pada organ untuk melihat bagaimana kafein mempengaruhi tubuh Anda
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-start">
           {/* Body Map */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -115,8 +111,8 @@ export default function BodyMap({ setActiveSection }: BodyMapProps) {
             viewport={{ once: true }}
             className="relative"
           >
-            <div className="sticky top-24">
-              <div className="relative h-175 bg-linear-to-br from-slate-900 via-slate-800 to-slate-900 rounded-3xl shadow-2xl p-8 overflow-hidden">
+            <div className="sticky top-20 sm:top-24">
+              <div className="relative h-175 bg-linear-to-br from-slate-900 via-slate-800 to-slate-900 rounded-3xl shadow-2xl p-4 sm:p-8 overflow-hidden">
                 {/* Grid background */}
                 <div className="absolute inset-0 opacity-10">
                   <div className="absolute inset-0" style={{
@@ -440,18 +436,18 @@ export default function BodyMap({ setActiveSection }: BodyMapProps) {
                   <div className="flex items-start justify-between mb-8">
                     <div className="flex-1">
                       <div className="flex items-center gap-4 mb-3">
-                        <div className={`bg-linear-to-br ${organs[selectedOrgan as keyof typeof organs].color} p-4 rounded-2xl shadow-lg`}>
+                        <div className={`bg-linear-to-br ${organs[selectedOrgan].color} p-4 rounded-2xl shadow-lg`}>
                           {(() => {
-                            const Icon = organs[selectedOrgan as keyof typeof organs].icon;
+                            const Icon = organs[selectedOrgan].icon;
                             return <Icon className="w-10 h-10 text-white" />;
                           })()}
                         </div>
                         <div>
                           <h3 className="text-3xl font-bold text-gray-900">
-                            {organs[selectedOrgan as keyof typeof organs].name}
+                            {organs[selectedOrgan].name}
                           </h3>
                           <p className="text-sm text-gray-500 mt-1">
-                            {organs[selectedOrgan as keyof typeof organs].scientificName}
+                            {organs[selectedOrgan].scientificName}
                           </p>
                         </div>
                       </div>
@@ -472,7 +468,7 @@ export default function BodyMap({ setActiveSection }: BodyMapProps) {
                       <span className="text-2xl">⚡</span> Efek Kafein
                     </h4>
                     <div className="space-y-3">
-                      {organs[selectedOrgan as keyof typeof organs].effects.map((effect, index) => (
+                      {organs[selectedOrgan].effects.map((effect, index) => (
                         <motion.div
                           key={index}
                           initial={{ opacity: 0, x: -20 }}
@@ -494,14 +490,14 @@ export default function BodyMap({ setActiveSection }: BodyMapProps) {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5 }}
-                    className={`bg-linear-to-br ${organs[selectedOrgan as keyof typeof organs].color} p-6 rounded-2xl text-white shadow-xl`}
+                    className={`bg-linear-to-br ${organs[selectedOrgan].color} p-6 rounded-2xl text-white shadow-xl`}
                   >
                     <div className="flex items-start gap-3">
                       <div className="shrink-0 text-2xl">⚠️</div>
                       <div>
                         <p className="font-bold mb-2 text-lg">Perhatian Penting</p>
                         <p className="text-white/90 leading-relaxed">
-                          {organs[selectedOrgan as keyof typeof organs].warning}
+                          {organs[selectedOrgan].warning}
                         </p>
                       </div>
                     </div>

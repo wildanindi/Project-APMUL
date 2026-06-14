@@ -2,12 +2,8 @@ import { useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
 import { FlaskConical, BookOpen, ExternalLink, Microscope, GraduationCap, Beaker, FileText, Link as LinkIcon } from 'lucide-react';
 
-interface ResearchLabProps {
-  setActiveSection: (section: string) => void;
-}
-
-export default function ResearchLab({ setActiveSection }: ResearchLabProps) {
-  const sectionRef = useRef<HTMLDivElement>(null);
+export default function ResearchLab({ setActiveSection }) {
+  const sectionRef = useRef(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -99,33 +95,33 @@ export default function ResearchLab({ setActiveSection }: ResearchLabProps) {
   ];
 
   return (
-    <section id="research" ref={sectionRef} className="relative min-h-screen py-24 px-6 bg-linear-to-b from-amber-50 to-white">
+    <section id="research" ref={sectionRef} className="relative min-h-screen py-16 sm:py-24 px-4 sm:px-6 bg-linear-to-b from-amber-50 to-white">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-16"
         >
           <div className="inline-block mb-4">
-            <FlaskConical className="w-16 h-16 text-amber-700 mx-auto" />
+            <FlaskConical className="w-12 h-12 sm:w-16 sm:h-16 text-amber-700 mx-auto" />
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-amber-900 mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-amber-900 mb-3 sm:mb-4">
             Laboratorium & Riset
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
             Pelajari lebih dalam dengan sumber-sumber ilmiah dan istilah medis
           </p>
         </motion.div>
 
         {/* Research Papers */}
-        <div className="mb-16">
-          <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-            <BookOpen className="w-6 h-6 text-amber-600" />
+        <div className="mb-12 sm:mb-16">
+          <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+            <BookOpen className="w-5 h-5 sm:w-6 sm:h-6 text-amber-600" />
             Sumber Riset Terpercaya
           </h3>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {resources.map((resource, index) => (
               <motion.a
                 key={index}
@@ -139,24 +135,24 @@ export default function ResearchLab({ setActiveSection }: ResearchLabProps) {
                 whileHover={{ y: -8, boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)' }}
                 className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all cursor-pointer group relative"
               >
-                <div className={`bg-gradient-to-br ${resource.color} p-6 text-white relative overflow-hidden`}>
+                <div className={`bg-gradient-to-br ${resource.color} p-4 sm:p-6 text-white relative overflow-hidden`}>
                   <div className="absolute inset-0 opacity-10" style={{
                     backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(255,255,255,0.8) 1px, transparent 1px)',
                     backgroundSize: '50px 50px'
                   }} />
                   <div className="relative z-10">
-                    <resource.icon className="w-10 h-10 mb-3 group-hover:scale-110 transition-transform" />
-                    <h4 className="font-bold text-lg leading-tight">{resource.title}</h4>
+                    <resource.icon className="w-8 h-8 sm:w-10 sm:h-10 mb-2 sm:mb-3 group-hover:scale-110 transition-transform" />
+                    <h4 className="font-bold text-base sm:text-lg leading-tight">{resource.title}</h4>
                   </div>
                 </div>
 
-                <div className="p-6">
-                  <p className="text-gray-600 text-sm mb-4 leading-relaxed">
+                <div className="p-4 sm:p-6">
+                  <p className="text-gray-600 text-xs sm:text-sm mb-3 sm:mb-4 leading-relaxed">
                     {resource.description}
                   </p>
 
                   {/* Topics */}
-                  <div className="mb-4 space-y-2">
+                  <div className="mb-3 sm:mb-4 space-y-2">
                     <div className="flex flex-wrap gap-2">
                       {resource.topics.map((topic, idx) => (
                         <motion.span
@@ -164,7 +160,7 @@ export default function ResearchLab({ setActiveSection }: ResearchLabProps) {
                           initial={{ opacity: 0, scale: 0.8 }}
                           whileInView={{ opacity: 1, scale: 1 }}
                           transition={{ delay: index * 0.1 + idx * 0.05 }}
-                          className="inline-block bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 px-2.5 py-1 rounded-full text-xs font-semibold border border-amber-200 hover:border-amber-400 transition-colors"
+                          className="inline-block bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full text-xs font-semibold border border-amber-200 hover:border-amber-400 transition-colors"
                         >
                           {topic}
                         </motion.span>
@@ -172,7 +168,7 @@ export default function ResearchLab({ setActiveSection }: ResearchLabProps) {
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between pt-4 border-t border-gray-200">
+                  <div className="flex items-center justify-between pt-3 sm:pt-4 border-t border-gray-200">
                     <span className="text-xs text-gray-500 font-medium">PubMed Central</span>
                     <motion.div
                       animate={{ x: [0, 3, 0] }}
@@ -189,12 +185,12 @@ export default function ResearchLab({ setActiveSection }: ResearchLabProps) {
 
         {/* Medical Glossary */}
         <div>
-          <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-            <Microscope className="w-6 h-6 text-amber-600" />
+          <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+            <Microscope className="w-5 h-5 sm:w-6 sm:h-6 text-amber-600" />
             Glosarium Istilah Medis
           </h3>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             {medicalTerms.map((item, index) => (
               <motion.div
                 key={index}

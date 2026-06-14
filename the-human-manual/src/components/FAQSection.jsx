@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { HelpCircle, ChevronDown } from 'lucide-react';
 
 export default function FAQSection() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [openIndex, setOpenIndex] = useState(null);
 
   const faqs = [
     {
@@ -40,31 +40,31 @@ export default function FAQSection() {
     },
   ];
 
-  const toggleFAQ = (index: number) => {
+  const toggleFAQ = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
-    <section className="relative min-h-screen py-24 px-6 bg-linear-to-b from-amber-50 to-white">
+    <section className="relative min-h-screen py-16 sm:py-24 px-4 sm:px-6 bg-linear-to-b from-amber-50 to-white">
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-16"
         >
           <div className="inline-block mb-4">
-            <HelpCircle className="w-16 h-16 text-amber-600 mx-auto" />
+            <HelpCircle className="w-12 h-12 sm:w-16 sm:h-16 text-amber-600 mx-auto" />
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-amber-900 mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-amber-900 mb-3 sm:mb-4">
             Pertanyaan yang Sering Diajukan
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
             Jawaban untuk pertanyaan umum seputar kafein dan kopi
           </p>
         </motion.div>
 
-        <div className="space-y-4">
+        <div className="space-y-3 sm:space-y-4">
           {faqs.map((faq, index) => (
             <motion.div
               key={index}
@@ -76,9 +76,9 @@ export default function FAQSection() {
             >
               <button
                 onClick={() => toggleFAQ(index)}
-                className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-amber-50 transition-colors"
+                className="w-full px-4 sm:px-6 py-4 sm:py-5 flex items-center justify-between text-left hover:bg-amber-50 transition-colors"
               >
-                <span className="font-semibold text-gray-900 pr-4">
+                <span className="font-semibold text-sm sm:text-base text-gray-900 pr-2 sm:pr-4">
                   {faq.question}
                 </span>
                 <motion.div
@@ -98,7 +98,7 @@ export default function FAQSection() {
                     transition={{ duration: 0.3 }}
                     className="overflow-hidden"
                   >
-                    <div className="px-6 pb-5 pt-2 text-gray-700 leading-relaxed bg-amber-50/50">
+                    <div className="px-4 sm:px-6 pb-4 sm:pb-5 pt-2 text-sm sm:text-base text-gray-700 leading-relaxed bg-amber-50/50">
                       {faq.answer}
                     </div>
                   </motion.div>

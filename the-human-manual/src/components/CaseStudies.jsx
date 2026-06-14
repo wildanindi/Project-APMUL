@@ -5,9 +5,6 @@ import {
   Moon, AlertTriangle, Activity, Thermometer, Brain, Stethoscope
 } from 'lucide-react';
 
-interface CaseStudiesProps {
-  setActiveSection: (section: string) => void;
-}
 
 const cases = [
   {
@@ -264,13 +261,13 @@ const cases = [
   }
 ];
 
-export default function CaseStudies({ setActiveSection }: CaseStudiesProps) {
+export default function CaseStudies({ setActiveSection }) {
   const [activeCase, setActiveCase] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [showResult, setShowResult] = useState(false);
-  const [completedCases, setCompletedCases] = useState<Set<number>>(new Set());
-  const [filter, setFilter] = useState<string>("Semua");
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const [completedCases, setCompletedCases] = useState(new Set());
+  const [filter, setFilter] = useState("Semua");
+  const sectionRef = useRef(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -289,13 +286,13 @@ export default function CaseStudies({ setActiveSection }: CaseStudiesProps) {
 
   const filteredCases = filter === "Semua" ? cases : cases.filter(c => c.category === filter);
 
-  const handleAnswer = (index: number) => {
+  const handleAnswer = (index) => {
     setSelectedAnswer(index);
     setShowResult(true);
     setCompletedCases(prev => new Set([...prev, activeCase]));
   };
 
-  const switchCase = (index: number) => {
+  const switchCase = (index) => {
     setActiveCase(index);
     setSelectedAnswer(null);
     setShowResult(false);
@@ -319,11 +316,11 @@ export default function CaseStudies({ setActiveSection }: CaseStudiesProps) {
   const currentFilteredIndex = filteredCases.indexOf(currentCase);
 
   return (
-    <section id="cases" ref={sectionRef} className="relative py-24 px-6 bg-linear-to-b from-amber-50 to-white overflow-hidden">
+    <section id="cases" ref={sectionRef} className="relative py-16 sm:py-24 px-4 sm:px-6 bg-linear-to-b from-amber-50 to-white overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 right-10 w-96 h-96 bg-amber-100 rounded-full opacity-30 blur-3xl" />
-        <div className="absolute bottom-20 left-10 w-80 h-80 bg-orange-100 rounded-full opacity-30 blur-3xl" />
+        <div className="absolute top-10 sm:top-20 right-5 sm:right-10 w-48 h-48 sm:w-96 sm:h-96 bg-amber-100 rounded-full opacity-30 blur-3xl" />
+        <div className="absolute bottom-10 sm:bottom-20 left-5 sm:left-10 w-40 h-40 sm:w-80 sm:h-80 bg-orange-100 rounded-full opacity-30 blur-3xl" />
       </div>
 
       <div className="relative max-w-6xl mx-auto">
@@ -332,20 +329,20 @@ export default function CaseStudies({ setActiveSection }: CaseStudiesProps) {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-8 sm:mb-12"
         >
-          <span className="inline-block px-4 py-1.5 bg-amber-100 text-amber-700 rounded-full text-sm font-semibold mb-4">
+          <span className="inline-block px-3 sm:px-4 py-1 sm:py-1.5 bg-amber-100 text-amber-700 rounded-full text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
             Studi Kasus Klinis
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-amber-900 mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-amber-900 mb-3 sm:mb-4">
             Hub Studi Kasus
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
             12 skenario medis nyata berdasarkan konteks Indonesia — pelajari dan uji pemahaman Anda
           </p>
           {/* Progress */}
-          <div className="flex items-center justify-center gap-3 mt-6">
-            <span className="text-sm text-gray-500">
+          <div className="flex items-center justify-center gap-2 sm:gap-3 mt-4 sm:mt-6">
+            <span className="text-xs sm:text-sm text-gray-500">
               {completedCases.size}/{cases.length} kasus selesai
             </span>
             <div className="w-48 h-2 bg-gray-200 rounded-full overflow-hidden">

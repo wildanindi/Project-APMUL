@@ -55,12 +55,12 @@ export default function InteractiveTimeline() {
     },
   ];
 
-  const handlePlayVideo = (index: number) => {
+  const handlePlayVideo = (index) => {
     setSelectedVideo(index);
     setShowVideo(true);
   };
 
-  const renderIllustration = (type: string) => {
+  const renderIllustration = (type) => {
     switch(type) {
       case 'drinking':
         return (
@@ -601,13 +601,13 @@ export default function InteractiveTimeline() {
   };
 
   return (
-    <div className="py-12 relative overflow-hidden">
+    <div className="py-8 sm:py-12 relative overflow-hidden px-4 sm:px-6">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(3)].map((_, i) => (
           <motion.div
             key={`bg-${i}`}
-            className="absolute w-96 h-96 rounded-full"
+            className="absolute w-40 h-40 sm:w-96 sm:h-96 rounded-full"
             style={{
               background: `radial-gradient(circle, ${i === 0 ? 'rgba(217, 119, 6, 0.1)' : i === 1 ? 'rgba(99, 102, 241, 0.1)' : 'rgba(236, 72, 153, 0.1)'})`,
               left: `${i * 40}%`,
@@ -626,7 +626,7 @@ export default function InteractiveTimeline() {
         ))}
       </div>
 
-      <h3 className="text-3xl font-bold text-center text-amber-900 mb-12 relative z-10">
+      <h3 className="text-2xl sm:text-3xl font-bold text-center text-amber-900 mb-8 sm:mb-12 relative z-10">
         <motion.span
           animate={{
             backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']

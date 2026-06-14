@@ -1,11 +1,7 @@
 import { motion } from 'motion/react';
 import { Coffee } from 'lucide-react';
 
-interface LoadingScreenProps {
-  onLoadingComplete: () => void;
-}
-
-export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps) {
+export default function LoadingScreen({ onLoadingComplete }) {
   return (
     <motion.div
       initial={{ opacity: 1 }}

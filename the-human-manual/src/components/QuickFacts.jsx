@@ -30,7 +30,7 @@ export default function QuickFacts() {
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-6xl mx-auto px-4 sm:px-6">
       {facts.map((fact, index) => (
         <motion.div
           key={index}
@@ -39,13 +39,13 @@ export default function QuickFacts() {
           viewport={{ once: true }}
           transition={{ delay: index * 0.1 }}
           whileHover={{ y: -5, scale: 1.02 }}
-          className="bg-white rounded-xl shadow-lg p-6 text-center"
+          className="bg-white rounded-xl shadow-lg p-4 sm:p-6 text-center"
         >
-          <div className={`${fact.color} w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4`}>
-            <fact.icon className="w-8 h-8 text-white" />
+          <div className={`${fact.color} w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4`}>
+            <fact.icon className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
           </div>
-          <div className="text-3xl font-bold text-gray-900 mb-2">{fact.number}</div>
-          <div className="text-sm text-gray-600">{fact.label}</div>
+          <div className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">{fact.number}</div>
+          <div className="text-xs sm:text-sm text-gray-600">{fact.label}</div>
         </motion.div>
       ))}
     </div>

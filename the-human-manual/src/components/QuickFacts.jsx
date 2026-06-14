@@ -11,8 +11,8 @@ export default function QuickFacts() {
     },
     {
       icon: Users,
-      number: '64%',
-      label: 'Orang dewasa Amerika minum kopi setiap hari',
+      number: '80%',
+      label: 'Populasi global mengonsumsi kafein setiap hari (kopi, teh, & cokelat)',
       color: 'bg-orange-500'
     },
     {

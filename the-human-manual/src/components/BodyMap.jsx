@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Brain, Heart, Utensils, X, Sparkles } from 'lucide-react';
+import { Brain, Heart, Utensils, X, Sparkles, Activity, Filter } from 'lucide-react';
 
 export default function BodyMap({ setActiveSection }) {
   const [selectedOrgan, setSelectedOrgan] = useState(null);
@@ -16,6 +16,8 @@ export default function BodyMap({ setActiveSection }) {
       glowColor: "shadow-purple-500/50",
       bgColor: "bg-purple-500",
       lineColor: "#8B5CF6",
+      glowBg: "rgba(139, 92, 246, 0.2)",
+      glowShadow: "0 0 20px rgba(139, 92, 246, 0.6)",
       effects: [
         "Meningkatkan kewaspadaan dan konsentrasi",
         "Menghambat reseptor adenosin (molekul pembawa kantuk)",
@@ -39,6 +41,8 @@ export default function BodyMap({ setActiveSection }) {
       glowColor: "shadow-red-500/50",
       bgColor: "bg-red-500",
       lineColor: "#EF4444",
+      glowBg: "rgba(239, 68, 68, 0.2)",
+      glowShadow: "0 0 20px rgba(239, 68, 68, 0.6)",
       effects: [
         "Meningkatkan detak jantung sementara",
         "Meningkatkan tekanan darah ringan",
@@ -54,14 +58,66 @@ export default function BodyMap({ setActiveSection }) {
       activeBorder: 'border-red-500/80',
       outlineGlow: 'hover:shadow-[0_0_15px_rgba(239,68,68,0.3)]'
     },
+    liver: {
+      icon: Activity,
+      name: "Hati",
+      position: "top-[40%] left-[45%] -translate-x-1/2 -translate-y-1/2",
+      color: "from-teal-500 to-teal-700",
+      glowColor: "shadow-teal-500/50",
+      bgColor: "bg-teal-500",
+      lineColor: "#14B8A6",
+      glowBg: "rgba(20, 184, 166, 0.2)",
+      glowShadow: "0 0 20px rgba(20, 184, 166, 0.6)",
+      effects: [
+        "Tempat utama metabolisme kafein oleh enzim sitokrom P450 (CYP1A2)",
+        "Konsumsi kopi secara teratur menurunkan risiko fibrosis dan sirosis hati",
+        "Membantu mengurangi penumpukan lemak berlebih di hati (fatty liver)",
+        "Kandungan antioksidan kafein mengurangi tingkat peradangan sel hati"
+      ],
+      warning: "Kerusakan hati kronis memperlambat pemrosesan kafein, memperpanjang efeknya",
+      scientificName: "Sistem Hepatobilier (Hepar)",
+      zoneStyle: { top: '36%', left: '41%', width: '8%', height: '8%' },
+      borderColor: 'border-teal-500/40',
+      hoverBg: 'hover:bg-teal-500/10',
+      selectedBg: 'bg-teal-500/15',
+      activeBorder: 'border-teal-500/80',
+      outlineGlow: 'hover:shadow-[0_0_15px_rgba(20,184,166,0.3)]'
+    },
+    kidneys: {
+      icon: Filter,
+      name: "Ginjal",
+      position: "top-[46%] left-[54%] -translate-x-1/2 -translate-y-1/2",
+      color: "from-blue-500 to-blue-700",
+      glowColor: "shadow-blue-500/50",
+      bgColor: "bg-blue-500",
+      lineColor: "#3B82F6",
+      glowBg: "rgba(59, 130, 246, 0.2)",
+      glowShadow: "0 0 20px rgba(59, 130, 246, 0.6)",
+      effects: [
+        "Menghambat reseptor adenosin di ginjal, memicu efek diuretik (sering buang air kecil)",
+        "Meningkatkan laju filtrasi darah (GFR) di ginjal secara sementara",
+        "Meningkatkan pembuangan kalsium dan magnesium melalui urine secara jangka pendek",
+        "Pada konsumsi normal, efek diuretik tidak menyebabkan dehidrasi tubuh"
+      ],
+      warning: "Konsumsi berlebih (>400mg) tanpa air putih dapat meningkatkan risiko batu ginjal",
+      scientificName: "Sistem Ekskresi (Renal)",
+      zoneStyle: { top: '43%', left: '51%', width: '8%', height: '8%' },
+      borderColor: 'border-blue-500/40',
+      hoverBg: 'hover:bg-blue-500/10',
+      selectedBg: 'bg-blue-500/15',
+      activeBorder: 'border-blue-500/80',
+      outlineGlow: 'hover:shadow-[0_0_15px_rgba(59,130,246,0.3)]'
+    },
     stomach: {
       icon: Utensils,
       name: "Pencernaan",
-      position: "top-[48%] left-[50%] -translate-x-1/2 -translate-y-1/2",
+      position: "top-[51%] left-[50%] -translate-x-1/2 -translate-y-1/2",
       color: "from-orange-500 to-orange-700",
       glowColor: "shadow-orange-500/50",
       bgColor: "bg-orange-500",
       lineColor: "#F97316",
+      glowBg: "rgba(249, 115, 22, 0.2)",
+      glowShadow: "0 0 20px rgba(249, 115, 22, 0.6)",
       effects: [
         "Kafein diserap di usus halus dalam 45 menit",
         "Merangsang produksi asam lambung",
@@ -70,7 +126,7 @@ export default function BodyMap({ setActiveSection }) {
       ],
       warning: "Konsumsi saat perut kosong dapat menyebabkan iritasi lambung",
       scientificName: "Sistem Pencernaan",
-      zoneStyle: { top: '37%', left: '41%', width: '18%', height: '20%' },
+      zoneStyle: { top: '51%', left: '44%', width: '12%', height: '11%' },
       borderColor: 'border-orange-500/40',
       hoverBg: 'hover:bg-orange-500/10',
       selectedBg: 'bg-orange-500/15',
@@ -151,7 +207,7 @@ export default function BodyMap({ setActiveSection }) {
                     className="w-full h-full object-cover rounded-2xl"
                   />
 
-                  {/* Glowing Hotspots & Labels (Visual only, pointer-events-none) */}
+                   {/* Glowing Hotspots & Labels (Visual only, pointer-events-none) */}
                   {Object.entries(organs).map(([key, organ]) => (
                     <div
                       key={`visual-${key}`}
@@ -161,12 +217,12 @@ export default function BodyMap({ setActiveSection }) {
                       <motion.div
                         className="relative w-12 h-12 sm:w-16 sm:h-16 rounded-full border-2 transition-all flex items-center justify-center"
                         style={{
-                          borderColor: key === 'brain' ? '#8B5CF6' : key === 'heart' ? '#EF4444' : '#F97316',
+                          borderColor: organ.lineColor,
                           backgroundColor: selectedOrgan === key || hoveredOrgan === key
-                            ? (key === 'brain' ? 'rgba(139, 92, 246, 0.2)' : key === 'heart' ? 'rgba(239, 68, 68, 0.2)' : 'rgba(249, 115, 22, 0.2)')
+                            ? organ.glowBg
                             : 'rgba(255, 255, 255, 0.1)',
                           boxShadow: selectedOrgan === key || hoveredOrgan === key
-                            ? (key === 'brain' ? '0 0 20px rgba(139, 92, 246, 0.6)' : key === 'heart' ? '0 0 20px rgba(239, 68, 68, 0.6)' : '0 0 20px rgba(249, 115, 22, 0.6)')
+                            ? organ.glowShadow
                             : 'none'
                         }}
                       >
@@ -174,7 +230,7 @@ export default function BodyMap({ setActiveSection }) {
                         <div
                           className="w-2.5 h-2.5 rounded-full"
                           style={{
-                            backgroundColor: key === 'brain' ? '#8B5CF6' : key === 'heart' ? '#EF4444' : '#F97316'
+                            backgroundColor: organ.lineColor
                           }}
                         />
 
@@ -189,7 +245,7 @@ export default function BodyMap({ setActiveSection }) {
                                 transition={{ duration: 1.5, repeat: Infinity }}
                                 className="absolute inset-0 rounded-full"
                                 style={{
-                                  border: `2px solid ${key === 'brain' ? '#8B5CF6' : key === 'heart' ? '#EF4444' : '#F97316'}`
+                                  border: `2px solid ${organ.lineColor}`
                                 }}
                               />
                               <motion.div
@@ -199,7 +255,7 @@ export default function BodyMap({ setActiveSection }) {
                                 transition={{ duration: 1.5, repeat: Infinity, delay: 0.3 }}
                                 className="absolute inset-0 rounded-full"
                                 style={{
-                                  border: `1px solid ${key === 'brain' ? '#8B5CF6' : key === 'heart' ? '#EF4444' : '#F97316'}`
+                                  border: `1px solid ${organ.lineColor}`
                                 }}
                               />
                             </>
@@ -218,7 +274,7 @@ export default function BodyMap({ setActiveSection }) {
                       >
                         <p className="text-xs font-bold text-gray-900 flex items-center gap-1.5">
                           <span className="w-1.5 h-1.5 rounded-full" style={{
-                            backgroundColor: key === 'brain' ? '#8B5CF6' : key === 'heart' ? '#EF4444' : '#F97316'
+                            backgroundColor: organ.lineColor
                           }} />
                           {organ.name}
                         </p>

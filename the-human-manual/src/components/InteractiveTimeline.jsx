@@ -80,109 +80,16 @@ export default function InteractiveTimeline() {
 
       case 'bloodstream':
         return (
-          <div className="relative w-full h-full bg-linear-to-br from-red-100 to-pink-200 rounded-2xl flex items-center justify-center overflow-hidden">
-            <svg viewBox="0 0 400 400" className="w-full h-full">
-              {/* Blood vessel */}
-              <g>
-                <path
-                  d="M 50 200 Q 150 150 250 200 T 450 200"
-                  stroke="#EF4444"
-                  strokeWidth="60"
-                  fill="none"
-                  opacity="0.3"
-                />
-                <path
-                  d="M 50 200 Q 150 150 250 200 T 450 200"
-                  stroke="#DC2626"
-                  strokeWidth="40"
-                  fill="none"
-                  opacity="0.5"
-                />
-
-                {/* Blood cells */}
-                {[...Array(8)].map((_, i) => (
-                  <motion.ellipse
-                    key={`cell-${i}`}
-                    cx={50 + i * 50}
-                    cy={200}
-                    rx="12"
-                    ry="8"
-                    fill="#F87171"
-                    animate={{
-                      x: [0, 400],
-                      y: [0, Math.sin(i) * 30, 0]
-                    }}
-                    transition={{
-                      duration: 4,
-                      repeat: Infinity,
-                      delay: i * 0.3,
-                      ease: "linear"
-                    }}
-                  />
-                ))}
-
-                {/* Caffeine molecules in bloodstream */}
-                {[...Array(6)].map((_, i) => (
-                  <motion.g key={`caffeine-${i}`}>
-                    <motion.circle
-                      cx={80 + i * 60}
-                      cy={200}
-                      r="8"
-                      fill="#D97706"
-                      animate={{
-                        x: [0, 400],
-                        y: [0, Math.cos(i) * 40, 0]
-                      }}
-                      transition={{
-                        duration: 3,
-                        repeat: Infinity,
-                        delay: i * 0.5,
-                        ease: "linear"
-                      }}
-                    />
-                    {/* Sparkle effect */}
-                    <motion.circle
-                      cx={80 + i * 60}
-                      cy={200}
-                      r="12"
-                      fill="#FBBF24"
-                      opacity="0.3"
-                      animate={{
-                        scale: [1, 1.5, 1],
-                        opacity: [0.3, 0, 0.3],
-                        x: [0, 400],
-                        y: [0, Math.cos(i) * 40, 0]
-                      }}
-                      transition={{
-                        duration: 3,
-                        repeat: Infinity,
-                        delay: i * 0.5,
-                        ease: "linear"
-                      }}
-                    />
-                  </motion.g>
-                ))}
-              </g>
-
-              {/* Heart icon */}
-              <motion.g
-                animate={{
-                  scale: [1, 1.1, 1]
-                }}
-                transition={{
-                  duration: 1,
-                  repeat: Infinity
-                }}
-              >
-                <path
-                  d="M 350 80 L 365 95 L 350 110 L 335 95 Z"
-                  fill="#DC2626"
-                  transform="rotate(45 350 95)"
-                />
-                <circle cx="342" cy="87" r="10" fill="#DC2626" />
-                <circle cx="358" cy="87" r="10" fill="#DC2626" />
-              </motion.g>
-            </svg>
+          <div className="relative w-full h-full bg-red-50 flex items-center justify-center overflow-hidden">
+            <video
+              src="/video/video 2 (aliran darah).mp4"
+              controls
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-cover"
+            />
           </div>
         );
 
@@ -203,131 +110,16 @@ export default function InteractiveTimeline() {
 
       case 'metabolism':
         return (
-          <div className="relative w-full h-full bg-linear-to-br from-blue-100 to-cyan-200 rounded-2xl flex items-center justify-center overflow-hidden">
-            <svg viewBox="0 0 400 400" className="w-full h-full">
-              {/* Liver */}
-              <g>
-                <path
-                  d="M 150 150 Q 120 180 130 220 L 270 220 Q 280 180 250 150 Z"
-                  fill="#DC2626"
-                  opacity="0.6"
-                  stroke="#991B1B"
-                  strokeWidth="3"
-                />
-
-                {/* Enzyme CYP1A2 */}
-                {[...Array(5)].map((_, i) => (
-                  <motion.g key={`enzyme-${i}`}>
-                    <motion.circle
-                      cx={160 + i * 25}
-                      cy={180}
-                      r="12"
-                      fill="#3B82F6"
-                      animate={{
-                        y: [0, -10, 0]
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        delay: i * 0.2
-                      }}
-                    />
-                    <text
-                      x={160 + i * 25}
-                      y={185}
-                      textAnchor="middle"
-                      fill="white"
-                      fontSize="8"
-                      fontWeight="bold"
-                    >
-                      E
-                    </text>
-                  </motion.g>
-                ))}
-
-                {/* Caffeine molecules being broken down */}
-                {[...Array(4)].map((_, i) => (
-                  <motion.g key={`breakdown-${i}`}>
-                    {/* Whole caffeine */}
-                    <motion.circle
-                      cx={170 + i * 30}
-                      cy={150}
-                      r="10"
-                      fill="#D97706"
-                      animate={{
-                        scale: [1, 0.5],
-                        opacity: [1, 0]
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        delay: i * 0.5
-                      }}
-                    />
-                    {/* Broken down pieces */}
-                    <motion.circle
-                      cx={165 + i * 30}
-                      cy={210}
-                      r="4"
-                      fill="#FBBF24"
-                      animate={{
-                        scale: [0, 1],
-                        opacity: [0, 1, 1, 0],
-                        x: [-5, -10]
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        delay: i * 0.5 + 0.5
-                      }}
-                    />
-                    <motion.circle
-                      cx={175 + i * 30}
-                      cy={210}
-                      r="4"
-                      fill="#FBBF24"
-                      animate={{
-                        scale: [0, 1],
-                        opacity: [0, 1, 1, 0],
-                        x: [5, 10]
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        delay: i * 0.5 + 0.5
-                      }}
-                    />
-                  </motion.g>
-                ))}
-              </g>
-
-              {/* Progress bar */}
-              <g>
-                <rect x="120" y="260" width="160" height="20" rx="10" fill="#E5E7EB" />
-                <motion.rect
-                  x="120"
-                  y="260"
-                  width="80"
-                  height="20"
-                  rx="10"
-                  fill="#3B82F6"
-                  animate={{
-                    width: [0, 160, 160]
-                  }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity
-                  }}
-                />
-                <text x="200" y="275" textAnchor="middle" fill="white" fontSize="12" fontWeight="bold">
-                  50% Metabolized
-                </text>
-              </g>
-
-              <text x="200" y="310" textAnchor="middle" fill="#1E40AF" fontSize="14" fontWeight="bold">
-                Liver Metabolism
-              </text>
-            </svg>
+          <div className="relative w-full h-full bg-blue-50 flex items-center justify-center overflow-hidden">
+            <video
+              src="/video/Video 4 (Kafein metabolisme).mp4"
+              controls
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-cover"
+            />
           </div>
         );
 

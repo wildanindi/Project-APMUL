@@ -64,81 +64,16 @@ export default function InteractiveTimeline() {
     switch(type) {
       case 'drinking':
         return (
-          <div className="relative w-full h-full bg-linear-to-br from-amber-100 to-amber-200 rounded-2xl flex items-center justify-center overflow-hidden">
-            <svg viewBox="0 0 400 400" className="w-full h-full">
-              {/* Person drinking coffee */}
-              <g>
-                {/* Head */}
-                <circle cx="200" cy="120" r="50" fill="#FED7AA" />
-                {/* Body */}
-                <rect x="175" y="160" width="50" height="80" rx="25" fill="#60A5FA" />
-                {/* Arm holding cup */}
-                <path d="M 225 180 Q 260 200 270 220" stroke="#FED7AA" strokeWidth="15" fill="none" strokeLinecap="round" />
-
-                {/* Coffee cup */}
-                <g>
-                  <rect x="260" y="210" width="40" height="50" rx="5" fill="#8B4513" stroke="#654321" strokeWidth="2" />
-                  <ellipse cx="280" cy="210" rx="20" ry="8" fill="#6B3410" />
-                  {/* Steam */}
-                  {[0, 1, 2].map(i => (
-                    <motion.path
-                      key={i}
-                      d={`M ${270 + i * 10} 200 Q ${272 + i * 10} 180 ${270 + i * 10} 160`}
-                      stroke="#D1D5DB"
-                      strokeWidth="2"
-                      fill="none"
-                      animate={{
-                        opacity: [0.3, 0.7, 0.3],
-                        y: [0, -10, 0]
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        delay: i * 0.3
-                      }}
-                    />
-                  ))}
-                </g>
-
-                {/* Mouth */}
-                <motion.ellipse
-                  cx="200"
-                  cy="135"
-                  rx="8"
-                  ry="12"
-                  fill="#8B4513"
-                  animate={{
-                    ry: [12, 8, 12]
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity
-                  }}
-                />
-              </g>
-
-              {/* Caffeine molecules */}
-              {[...Array(5)].map((_, i) => (
-                <motion.circle
-                  key={i}
-                  cx={250 + Math.random() * 30}
-                  cy={220 + i * 15}
-                  r="4"
-                  fill="#D97706"
-                  initial={{ opacity: 0, x: 0 }}
-                  animate={{
-                    opacity: [0, 1, 0],
-                    x: [-30, 0],
-                    y: [0, 20]
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    delay: i * 0.4
-                  }}
-                />
-              ))}
-            </svg>
+          <div className="relative w-full h-full bg-amber-50 flex items-center justify-center overflow-hidden">
+            <video
+              src="/video/video 1 (konsumsi kopi).mp4"
+              controls
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-cover"
+            />
           </div>
         );
 
@@ -919,7 +854,7 @@ export default function InteractiveTimeline() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 overflow-y-auto py-6 px-4 flex justify-center items-start md:items-center"
             onClick={() => setShowVideo(false)}
           >
             <motion.div
@@ -927,12 +862,12 @@ export default function InteractiveTimeline() {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.8, opacity: 0, y: 20 }}
               transition={{ type: "spring", damping: 20, stiffness: 300 }}
-              className="relative w-full max-w-4xl bg-white rounded-3xl shadow-2xl overflow-hidden"
+              className="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl overflow-hidden my-auto"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header with animated gradient */}
               <motion.div
-                className="bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 p-8 text-white relative overflow-hidden"
+                className="bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 p-5 md:p-6 text-white relative overflow-hidden"
                 animate={{
                   backgroundPosition: ['0% 0%', '100% 100%', '0% 0%']
                 }}
@@ -961,7 +896,7 @@ export default function InteractiveTimeline() {
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ delay: 0.2 }}
                   >
-                    <h3 className="text-3xl font-bold mb-1">{timeline[selectedVideo].title}</h3>
+                    <h3 className="text-2xl font-bold mb-1">{timeline[selectedVideo].title}</h3>
                     <motion.p
                       className="text-purple-100 font-semibold"
                       animate={{
@@ -976,15 +911,15 @@ export default function InteractiveTimeline() {
                     whileHover={{ scale: 1.2, rotate: 90 }}
                     whileTap={{ scale: 0.9 }}
                     onClick={() => setShowVideo(false)}
-                    className="bg-white/20 hover:bg-white/40 p-3 rounded-full transition-colors backdrop-blur"
+                    className="bg-white/20 hover:bg-white/40 p-2.5 rounded-full transition-colors backdrop-blur"
                   >
-                    <X className="w-6 h-6" />
+                    <X className="w-5 h-5" />
                   </motion.button>
                 </div>
               </motion.div>
 
               {/* Illustration Area with frame effect */}
-              <div className="p-8">
+              <div className="p-5 md:p-6">
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -1002,7 +937,7 @@ export default function InteractiveTimeline() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
-                  className="mt-8 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 rounded-2xl p-8 shadow-lg border border-amber-200 relative overflow-hidden"
+                  className="mt-5 md:mt-6 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 rounded-2xl p-5 md:p-6 shadow-lg border border-amber-200 relative overflow-hidden"
                 >
                   {/* Animated background shimmer */}
                   <motion.div
@@ -1051,6 +986,19 @@ export default function InteractiveTimeline() {
                     ))}
                   </div>
                 </motion.div>
+
+                {/* Close button at the bottom for better accessibility */}
+                <div className="mt-5 flex justify-end">
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => setShowVideo(false)}
+                    className="px-6 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-xl transition-all shadow-sm flex items-center gap-2 cursor-pointer"
+                  >
+                    <X className="w-4 h-4" />
+                    <span>Tutup</span>
+                  </motion.button>
+                </div>
               </div>
             </motion.div>
           </motion.div>

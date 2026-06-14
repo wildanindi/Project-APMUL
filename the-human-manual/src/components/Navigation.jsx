@@ -29,6 +29,7 @@ export default function Navigation({ activeSection }) {
     { id: 'how-it-works', label: 'Cara Kerja' },
     { id: 'body-map', label: 'Peta Tubuh' },
     { id: 'cases', label: 'Studi Kasus' },
+    { id: 'research', label: 'Laboratorium & Riset' },
   ];
 
   return (

@@ -138,20 +138,7 @@ export default function TipsSection() {
           </div>
         </motion.div>
 
-        {/* Additional Info */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-6 sm:mt-8 bg-blue-50 border-2 border-blue-200 rounded-xl p-4 sm:p-6"
-        >
-          <h4 className="font-semibold text-sm sm:text-base text-blue-900 mb-2">💡 Catatan Penting untuk Mahasiswa Kesehatan</h4>
-          <p className="text-blue-800 text-xs sm:text-sm">
-            Informasi ini dapat digunakan sebagai dasar edukasi pasien tentang konsumsi kafein yang aman.
-            Selalu pertimbangkan kondisi medis individual, interaksi obat, dan faktor genetik saat memberikan
-            rekomendasi klinis.
-          </p>
-        </motion.div>
+
       </div>
     </section>
   );

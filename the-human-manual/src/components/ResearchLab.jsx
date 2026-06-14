@@ -6,7 +6,7 @@ const medicalTerms = [
   {
     term: "Adenosin",
     definition: "Nukleosida yang berfungsi sebagai neuromodulator, menyebabkan rasa kantuk dengan mengikat reseptor A1 dan A2A.",
-    audioFile: "adenosin.mp3"
+    audioFile: "Adenosin Dubbing Eky.mp3"
   },
   {
     term: "CYP1A2",
@@ -95,7 +95,7 @@ export default function ResearchLab({ setActiveSection }) {
       audioRef.current = null;
     }
 
-    const audioUrl = `/audio/${audioFile}`;
+    const audioUrl = `/audio/${encodeURIComponent(audioFile)}`;
     const audio = new Audio(audioUrl);
     audioRef.current = audio;
     setPlayingTerm(termName);
@@ -376,7 +376,7 @@ export default function ResearchLab({ setActiveSection }) {
                                 )}
                               </button>
                               <a
-                                href={`/audio/${item.audioFile}`}
+                                href={`/audio/${encodeURIComponent(item.audioFile)}`}
                                 download={item.audioFile}
                                 className="p-1.5 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-700 transition-all flex items-center justify-center cursor-pointer"
                                 title="Unduh File MP3"

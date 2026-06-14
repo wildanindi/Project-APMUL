@@ -1,9 +1,99 @@
-import { useEffect, useRef } from 'react';
-import { motion } from 'motion/react';
-import { FlaskConical, BookOpen, ExternalLink, Microscope, GraduationCap, Beaker, FileText, Link as LinkIcon } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { FlaskConical, BookOpen, ExternalLink, Microscope, GraduationCap, Beaker, FileText, Link as LinkIcon, Volume2, VolumeX, Search, X } from 'lucide-react';
+
+const medicalTerms = [
+  {
+    term: "Adenosin",
+    definition: "Nukleosida yang berfungsi sebagai neuromodulator, menyebabkan rasa kantuk dengan mengikat reseptor A1 dan A2A."
+  },
+  {
+    term: "CYP1A2",
+    definition: "Enzim sitokrom P450 di hati yang bertanggung jawab atas metabolisme sekitar 95% kafein yang dikonsumsi."
+  },
+  {
+    term: "Waktu Paruh",
+    definition: "Waktu yang dibutuhkan tubuh untuk mengeliminasi setengah dari dosis obat/zat (kafein), rata-rata 3-5 jam pada dewasa sehat."
+  },
+  {
+    term: "Toleransi",
+    definition: "Penurunan respons tubuh terhadap dosis kafein yang sama akibat upregulasi (penambahan) jumlah reseptor adenosin di otak."
+  },
+  {
+    term: "Dopamin",
+    definition: "Neurotransmiter di otak yang mengatur motivasi, rasa senang, dan fungsi motorik; kadarnya ditingkatkan secara tidak langsung oleh kafein."
+  },
+  {
+    term: "L-Theanine",
+    definition: "Asam amino dalam teh hijau yang memberikan efek relaksasi dan menenangkan tanpa menyebabkan kantuk, menyeimbangkan efek stimulasi kafein."
+  },
+  {
+    term: "Withdrawal",
+    definition: "Gejala putus zat (seperti sakit kepala, lesu, cemas) ketika konsumsi kafein rutin dihentikan secara tiba-tiba."
+  },
+  {
+    term: "Diuretik",
+    definition: "Zat atau efek yang memicu peningkatan produksi urin oleh ginjal, menyebabkan peningkatan frekuensi buang air kecil."
+  },
+  {
+    term: "Gastritis",
+    definition: "Peradangan pada selaput lendir lambung (maag) yang dapat diperparah oleh kafein karena merangsang produksi asam lambung (HCl) berlebih."
+  },
+  {
+    term: "Vasokonstriksi",
+    definition: "Penyempitan diameter pembuluh darah akibat kontraksi otot dindingnya, menyebabkan kenaikan tekanan darah sementara saat mengonsumsi kafein."
+  },
+  {
+    term: "Aritmia",
+    definition: "Gangguan pada irama detak jantung (terlalu cepat, lambat, atau tidak teratur) yang dapat dipicu oleh konsumsi kafein dalam dosis berlebih."
+  }
+];
 
 export default function ResearchLab({ setActiveSection }) {
+  const [playingTerm, setPlayingTerm] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
   const sectionRef = useRef(null);
+
+  const filteredTerms = medicalTerms.filter(item =>
+    item.term.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    item.definition.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  useEffect(() => {
+    return () => {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+    };
+  }, []);
+
+  const speak = (termName, text) => {
+    if ('speechSynthesis' in window) {
+      if (playingTerm === termName) {
+        window.speechSynthesis.cancel();
+        setPlayingTerm(null);
+        return;
+      }
+
+      window.speechSynthesis.cancel();
+
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'id-ID';
+
+      utterance.onend = () => {
+        setPlayingTerm(null);
+      };
+
+      utterance.onerror = () => {
+        setPlayingTerm(null);
+      };
+
+      setPlayingTerm(termName);
+      window.speechSynthesis.speak(utterance);
+    } else {
+      alert("Browser Anda tidak mendukung fitur pembaca suara (Text-to-Speech).");
+    }
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -72,25 +162,6 @@ export default function ResearchLab({ setActiveSection }) {
       color: 'from-indigo-500 to-purple-500',
       topics: ['LD50', 'Dosis Terapeutik', 'Toksisitas Akut', 'Batas Aman'],
       url: 'https://pubmed.ncbi.nlm.nih.gov/26522129/'
-    }
-  ];
-
-  const medicalTerms = [
-    {
-      term: "Adenosin",
-      definition: "Nukleosida yang berfungsi sebagai neuromodulator, menyebabkan rasa kantuk dengan mengikat reseptor A1 dan A2A"
-    },
-    {
-      term: "CYP1A2",
-      definition: "Enzim sitokrom P450 di hati yang bertanggung jawab metabolisme ~95% kafein yang dikonsumsi"
-    },
-    {
-      term: "Waktu Paruh",
-      definition: "Waktu yang dibutuhkan tubuh untuk mengeliminasi setengah dari dosis kafein, rata-rata 3-5 jam pada dewasa sehat"
-    },
-    {
-      term: "Toleransi",
-      definition: "Penurunan respons terhadap kafein akibat upregulasi reseptor adenosin setelah konsumsi kronis"
     }
   ];
 
@@ -185,37 +256,113 @@ export default function ResearchLab({ setActiveSection }) {
 
         {/* Medical Glossary */}
         <div>
-          <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-            <Microscope className="w-5 h-5 sm:w-6 sm:h-6 text-amber-600" />
-            Glosarium Istilah Medis
-          </h3>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-            {medicalTerms.map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow"
-              >
-                <div className="flex items-start gap-3">
-                  <div className="bg-amber-100 rounded-full p-2 mt-1">
-                    <span className="text-amber-700 font-bold text-sm">i</span>
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="font-bold text-gray-900 mb-2 text-lg">
-                      {item.term}
-                    </h4>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      {item.definition}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 flex items-center gap-2">
+              <Microscope className="w-5 h-5 sm:w-6 sm:h-6 text-amber-600" />
+              Glosarium Istilah Medis
+            </h3>
+            
+            {/* Search Input */}
+            <div className="relative w-full md:max-w-xs shrink-0">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Cari istilah medis..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-9 pr-8 py-2 rounded-xl border border-gray-200 focus:border-amber-500 focus:ring-1 focus:ring-amber-500/20 focus:outline-none bg-white text-gray-800 transition-all text-xs"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 cursor-pointer"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              )}
+            </div>
           </div>
+
+          <AnimatePresence mode="popLayout">
+            {filteredTerms.length === 0 ? (
+              <motion.div
+                key="no-results"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                className="text-center py-12 bg-white rounded-xl shadow-lg border-2 border-dashed border-gray-200"
+              >
+                <span className="text-4xl mb-3 block">🔍</span>
+                <p className="text-gray-500 text-sm">Tidak ada istilah medis yang cocok dengan "{searchQuery}"</p>
+                <button
+                  onClick={() => setSearchQuery("")}
+                  className="mt-3 px-4 py-1.5 bg-amber-600 text-white rounded-lg text-xs font-semibold hover:bg-amber-700 transition-colors cursor-pointer"
+                >
+                  Reset Pencarian
+                </button>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="results-grid"
+                layout
+                className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6"
+              >
+                {filteredTerms.map((item) => {
+                  return (
+                    <motion.div
+                      key={item.term}
+                      layout
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.95 }}
+                      transition={{ duration: 0.2 }}
+                      className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow"
+                    >
+                      <div className="flex items-start gap-3">
+                        <div className="bg-amber-100 rounded-full p-2 mt-1 shrink-0">
+                          <span className="text-amber-700 font-bold text-sm">i</span>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center justify-between mb-2">
+                            <div className="flex items-center gap-2 min-w-0">
+                              <h4 className="font-bold text-gray-900 text-lg truncate">
+                                {item.term}
+                              </h4>
+                              {playingTerm === item.term && (
+                                <div className="flex items-center gap-0.5 h-3 px-1 shrink-0">
+                                  <motion.span className="w-0.5 bg-amber-600 rounded-full" animate={{ height: [4, 12, 4] }} transition={{ repeat: Infinity, duration: 0.6 }} />
+                                  <motion.span className="w-0.5 bg-amber-600 rounded-full" animate={{ height: [8, 4, 8] }} transition={{ repeat: Infinity, duration: 0.5, delay: 0.1 }} />
+                                  <motion.span className="w-0.5 bg-amber-600 rounded-full" animate={{ height: [6, 12, 6] }} transition={{ repeat: Infinity, duration: 0.7, delay: 0.2 }} />
+                                </div>
+                              )}
+                            </div>
+                            <button
+                              onClick={() => speak(item.term, `${item.term}. ${item.definition}`)}
+                              className={`p-1.5 rounded-lg transition-all flex items-center justify-center cursor-pointer shrink-0 ${
+                                playingTerm === item.term
+                                  ? 'bg-amber-600 text-white animate-pulse shadow-md shadow-amber-600/30'
+                                  : 'bg-amber-50 hover:bg-amber-100 text-amber-700'
+                              }`}
+                              title={playingTerm === item.term ? "Hentikan Suara" : "Dengarkan Penjelasan"}
+                            >
+                              {playingTerm === item.term ? (
+                                <VolumeX className="w-4 h-4" />
+                              ) : (
+                                <Volume2 className="w-4 h-4" />
+                              )}
+                            </button>
+                          </div>
+                          <p className="text-gray-600 text-sm leading-relaxed">
+                            {item.definition}
+                          </p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         {/* Additional Info */}

@@ -1,51 +1,62 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { FlaskConical, BookOpen, ExternalLink, Microscope, GraduationCap, Beaker, FileText, Link as LinkIcon, Volume2, VolumeX, Search, X } from 'lucide-react';
+import { FlaskConical, BookOpen, ExternalLink, Microscope, GraduationCap, Beaker, FileText, Link as LinkIcon, Volume2, VolumeX, Search, X, Download } from 'lucide-react';
 
 const medicalTerms = [
   {
     term: "Adenosin",
-    definition: "Nukleosida yang berfungsi sebagai neuromodulator, menyebabkan rasa kantuk dengan mengikat reseptor A1 dan A2A."
+    definition: "Nukleosida yang berfungsi sebagai neuromodulator, menyebabkan rasa kantuk dengan mengikat reseptor A1 dan A2A.",
+    audioFile: "adenosin.mp3"
   },
   {
     term: "CYP1A2",
-    definition: "Enzim sitokrom P450 di hati yang bertanggung jawab atas metabolisme sekitar 95% kafein yang dikonsumsi."
+    definition: "Enzim sitokrom P450 di hati yang bertanggung jawab atas metabolisme sekitar 95% kafein yang dikonsumsi.",
+    audioFile: "cyp1a2.mp3"
   },
   {
     term: "Waktu Paruh",
-    definition: "Waktu yang dibutuhkan tubuh untuk mengeliminasi setengah dari dosis obat/zat (kafein), rata-rata 3-5 jam pada dewasa sehat."
+    definition: "Waktu yang dibutuhkan tubuh untuk mengeliminasi setengah dari dosis obat/zat (kafein), rata-rata 3-5 jam pada dewasa sehat.",
+    audioFile: "waktu-paruh.mp3"
   },
   {
     term: "Toleransi",
-    definition: "Penurunan respons tubuh terhadap dosis kafein yang sama akibat upregulasi (penambahan) jumlah reseptor adenosin di otak."
+    definition: "Penurunan respons tubuh terhadap dosis kafein yang sama akibat upregulasi (penambahan) jumlah reseptor adenosin di otak.",
+    audioFile: "toleransi.mp3"
   },
   {
     term: "Dopamin",
-    definition: "Neurotransmiter di otak yang mengatur motivasi, rasa senang, dan fungsi motorik; kadarnya ditingkatkan secara tidak langsung oleh kafein."
+    definition: "Neurotransmiter di otak yang mengatur motivasi, rasa senang, dan fungsi motorik; kadarnya ditingkatkan secara tidak langsung oleh kafein.",
+    audioFile: "dopamin.mp3"
   },
   {
     term: "L-Theanine",
-    definition: "Asam amino dalam teh hijau yang memberikan efek relaksasi dan menenangkan tanpa menyebabkan kantuk, menyeimbangkan efek stimulasi kafein."
+    definition: "Asam amino dalam teh hijau yang memberikan efek relaksasi dan menenangkan tanpa menyebabkan kantuk, menyeimbangkan efek stimulasi kafein.",
+    audioFile: "l-theanine.mp3"
   },
   {
     term: "Withdrawal",
-    definition: "Gejala putus zat (seperti sakit kepala, lesu, cemas) ketika konsumsi kafein rutin dihentikan secara tiba-tiba."
+    definition: "Gejala putus zat (seperti sakit kepala, lesu, cemas) ketika konsumsi kafein rutin dihentikan secara tiba-tiba.",
+    audioFile: "withdrawal.mp3"
   },
   {
     term: "Diuretik",
-    definition: "Zat atau efek yang memicu peningkatan produksi urin oleh ginjal, menyebabkan peningkatan frekuensi buang air kecil."
+    definition: "Zat atau efek yang memicu peningkatan produksi urin oleh ginjal, menyebabkan peningkatan frekuensi buang air kecil.",
+    audioFile: "diuretik.mp3"
   },
   {
     term: "Gastritis",
-    definition: "Peradangan pada selaput lendir lambung (maag) yang dapat diperparah oleh kafein karena merangsang produksi asam lambung (HCl) berlebih."
+    definition: "Peradangan pada selaput lendir lambung (maag) yang dapat diperparah oleh kafein karena merangsang produksi asam lambung (HCl) berlebih.",
+    audioFile: "gastritis.mp3"
   },
   {
     term: "Vasokonstriksi",
-    definition: "Penyempitan diameter pembuluh darah akibat kontraksi otot dindingnya, menyebabkan kenaikan tekanan darah sementara saat mengonsumsi kafein."
+    definition: "Penyempitan diameter pembuluh darah akibat kontraksi otot dindingnya, menyebabkan kenaikan tekanan darah sementara saat mengonsumsi kafein.",
+    audioFile: "vasokonstriksi.mp3"
   },
   {
     term: "Aritmia",
-    definition: "Gangguan pada irama detak jantung (terlalu cepat, lambat, atau tidak teratur) yang dapat dipicu oleh konsumsi kafein dalam dosis berlebih."
+    definition: "Gangguan pada irama detak jantung (terlalu cepat, lambat, atau tidak teratur) yang dapat dipicu oleh konsumsi kafein dalam dosis berlebih.",
+    audioFile: "aritmia.mp3"
   }
 ];
 
@@ -53,6 +64,7 @@ export default function ResearchLab({ setActiveSection }) {
   const [playingTerm, setPlayingTerm] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const sectionRef = useRef(null);
+  const audioRef = useRef(null);
 
   const filteredTerms = medicalTerms.filter(item =>
     item.term.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -61,38 +73,49 @@ export default function ResearchLab({ setActiveSection }) {
 
   useEffect(() => {
     return () => {
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
       }
     };
   }, []);
 
-  const speak = (termName, text) => {
-    if ('speechSynthesis' in window) {
-      if (playingTerm === termName) {
-        window.speechSynthesis.cancel();
-        setPlayingTerm(null);
-        return;
+  const speak = (termName, audioFile) => {
+    if (playingTerm === termName) {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
       }
-
-      window.speechSynthesis.cancel();
-
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'id-ID';
-
-      utterance.onend = () => {
-        setPlayingTerm(null);
-      };
-
-      utterance.onerror = () => {
-        setPlayingTerm(null);
-      };
-
-      setPlayingTerm(termName);
-      window.speechSynthesis.speak(utterance);
-    } else {
-      alert("Browser Anda tidak mendukung fitur pembaca suara (Text-to-Speech).");
+      setPlayingTerm(null);
+      return;
     }
+
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current = null;
+    }
+
+    const audioUrl = `/audio/${audioFile}`;
+    const audio = new Audio(audioUrl);
+    audioRef.current = audio;
+    setPlayingTerm(termName);
+
+    audio.onended = () => {
+      setPlayingTerm(null);
+      audioRef.current = null;
+    };
+
+    audio.onerror = () => {
+      console.error(`Failed to play audio: ${audioUrl}`);
+      setPlayingTerm(null);
+      audioRef.current = null;
+    };
+
+    audio.play().catch(err => {
+      console.error("Audio play failed:", err);
+      setPlayingTerm(null);
+      audioRef.current = null;
+    });
   };
 
   useEffect(() => {
@@ -336,21 +359,31 @@ export default function ResearchLab({ setActiveSection }) {
                                 </div>
                               )}
                             </div>
-                            <button
-                              onClick={() => speak(item.term, `${item.term}. ${item.definition}`)}
-                              className={`p-1.5 rounded-lg transition-all flex items-center justify-center cursor-pointer shrink-0 ${
-                                playingTerm === item.term
-                                  ? 'bg-amber-600 text-white animate-pulse shadow-md shadow-amber-600/30'
-                                  : 'bg-amber-50 hover:bg-amber-100 text-amber-700'
-                              }`}
-                              title={playingTerm === item.term ? "Hentikan Suara" : "Dengarkan Penjelasan"}
-                            >
-                              {playingTerm === item.term ? (
-                                <VolumeX className="w-4 h-4" />
-                              ) : (
-                                <Volume2 className="w-4 h-4" />
-                              )}
-                            </button>
+                            <div className="flex items-center gap-1.5 shrink-0">
+                              <button
+                                onClick={() => speak(item.term, item.audioFile)}
+                                className={`p-1.5 rounded-lg transition-all flex items-center justify-center cursor-pointer ${
+                                  playingTerm === item.term
+                                    ? 'bg-amber-600 text-white animate-pulse shadow-md shadow-amber-600/30'
+                                    : 'bg-amber-50 hover:bg-amber-100 text-amber-700'
+                                }`}
+                                title={playingTerm === item.term ? "Hentikan Suara" : "Dengarkan Penjelasan"}
+                              >
+                                {playingTerm === item.term ? (
+                                  <VolumeX className="w-4 h-4" />
+                                ) : (
+                                  <Volume2 className="w-4 h-4" />
+                                )}
+                              </button>
+                              <a
+                                href={`/audio/${item.audioFile}`}
+                                download={item.audioFile}
+                                className="p-1.5 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-700 transition-all flex items-center justify-center cursor-pointer"
+                                title="Unduh File MP3"
+                              >
+                                <Download className="w-4 h-4" />
+                              </a>
+                            </div>
                           </div>
                           <p className="text-gray-600 text-sm leading-relaxed">
                             {item.definition}

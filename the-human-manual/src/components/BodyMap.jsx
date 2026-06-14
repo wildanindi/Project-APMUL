@@ -11,10 +11,11 @@ export default function BodyMap({ setActiveSection }) {
     brain: {
       icon: Brain,
       name: "Otak",
-      position: "top-[7%] left-1/2 -translate-x-1/2 -translate-y-1/2",
+      position: "top-[15%] left-[50%] -translate-x-1/2 -translate-y-1/2",
       color: "from-purple-500 to-purple-700",
       glowColor: "shadow-purple-500/50",
       bgColor: "bg-purple-500",
+      lineColor: "#8B5CF6",
       effects: [
         "Meningkatkan kewaspadaan dan konsentrasi",
         "Menghambat reseptor adenosin (molekul pembawa kantuk)",
@@ -22,15 +23,22 @@ export default function BodyMap({ setActiveSection }) {
         "Memperbaiki suasana hati dan fungsi kognitif"
       ],
       warning: "Konsumsi berlebihan dapat menyebabkan kecemasan dan insomnia",
-      scientificName: "Sistem Saraf Pusat"
+      scientificName: "Sistem Saraf Pusat",
+      zoneStyle: { top: '7%', left: '42%', width: '16%', height: '14%' },
+      borderColor: 'border-purple-500/40',
+      hoverBg: 'hover:bg-purple-500/10',
+      selectedBg: 'bg-purple-500/15',
+      activeBorder: 'border-purple-500/80',
+      outlineGlow: 'hover:shadow-[0_0_15px_rgba(139,92,246,0.3)]'
     },
     heart: {
       icon: Heart,
       name: "Jantung",
-      position: "top-[27%] left-[47.5%] -translate-x-1/2 -translate-y-1/2",
+      position: "top-[31%] left-[50%] -translate-x-1/2 -translate-y-1/2",
       color: "from-red-500 to-red-700",
       glowColor: "shadow-red-500/50",
       bgColor: "bg-red-500",
+      lineColor: "#EF4444",
       effects: [
         "Meningkatkan detak jantung sementara",
         "Meningkatkan tekanan darah ringan",
@@ -38,15 +46,22 @@ export default function BodyMap({ setActiveSection }) {
         "Meningkatkan aliran darah ke otot"
       ],
       warning: "Penderita hipertensi harus membatasi konsumsi kafein",
-      scientificName: "Sistem Kardiovaskular"
+      scientificName: "Sistem Kardiovaskular",
+      zoneStyle: { top: '22%', left: '43%', width: '14%', height: '14%' },
+      borderColor: 'border-red-500/40',
+      hoverBg: 'hover:bg-red-500/10',
+      selectedBg: 'bg-red-500/15',
+      activeBorder: 'border-red-500/80',
+      outlineGlow: 'hover:shadow-[0_0_15px_rgba(239,68,68,0.3)]'
     },
     stomach: {
       icon: Utensils,
       name: "Pencernaan",
-      position: "top-[37%] left-1/2 -translate-x-1/2 -translate-y-1/2",
+      position: "top-[48%] left-[50%] -translate-x-1/2 -translate-y-1/2",
       color: "from-orange-500 to-orange-700",
       glowColor: "shadow-orange-500/50",
       bgColor: "bg-orange-500",
+      lineColor: "#F97316",
       effects: [
         "Kafein diserap di usus halus dalam 45 menit",
         "Merangsang produksi asam lambung",
@@ -54,7 +69,13 @@ export default function BodyMap({ setActiveSection }) {
         "Dapat bersifat diuretik (meningkatkan buang air kecil)"
       ],
       warning: "Konsumsi saat perut kosong dapat menyebabkan iritasi lambung",
-      scientificName: "Sistem Pencernaan"
+      scientificName: "Sistem Pencernaan",
+      zoneStyle: { top: '37%', left: '41%', width: '18%', height: '20%' },
+      borderColor: 'border-orange-500/40',
+      hoverBg: 'hover:bg-orange-500/10',
+      selectedBg: 'bg-orange-500/15',
+      activeBorder: 'border-orange-500/80',
+      outlineGlow: 'hover:shadow-[0_0_15px_rgba(249,115,22,0.3)]'
     }
   };
 
@@ -112,306 +133,156 @@ export default function BodyMap({ setActiveSection }) {
             className="relative"
           >
             <div className="sticky top-20 sm:top-24">
-              <div className="relative h-[500px] sm:h-[650px] bg-linear-to-br from-slate-900 via-slate-800 to-slate-900 rounded-3xl shadow-2xl p-4 sm:p-6 overflow-hidden flex items-center justify-center">
+              <div className="relative h-[500px] sm:h-[650px] bg-slate-50 rounded-3xl shadow-2xl p-4 sm:p-6 overflow-hidden flex items-center justify-center border border-slate-100">
                 {/* Grid background */}
-                <div className="absolute inset-0 opacity-10">
+                <div className="absolute inset-0 opacity-40">
                   <div className="absolute inset-0" style={{
-                    backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
+                    backgroundImage: 'linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px)',
                     backgroundSize: '30px 30px'
                   }} />
                 </div>
 
-                {/* Aspect-locked container to hold SVG and buttons */}
-                <div className="relative aspect-[2/5] h-full z-10 flex items-center justify-center">
-                  {/* Detailed Human Body SVG */}
-                  <svg viewBox="0 0 200 500" className="w-full h-full relative z-10">
-                  <defs>
-                    <linearGradient id="bodyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stopColor="#60A5FA" stopOpacity="0.4" />
-                      <stop offset="30%" stopColor="#3B82F6" stopOpacity="0.3" />
-                      <stop offset="70%" stopColor="#2563EB" stopOpacity="0.3" />
-                      <stop offset="100%" stopColor="#1D4ED8" stopOpacity="0.4" />
-                    </linearGradient>
-                    <linearGradient id="muscleGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.2" />
-                      <stop offset="50%" stopColor="#60A5FA" stopOpacity="0.4" />
-                      <stop offset="100%" stopColor="#3B82F6" stopOpacity="0.2" />
-                    </linearGradient>
-                    <filter id="innerShadow">
-                      <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
-                      <feOffset dx="0" dy="1" result="offsetblur"/>
-                      <feComponentTransfer>
-                        <feFuncA type="linear" slope="0.5"/>
-                      </feComponentTransfer>
-                      <feMerge>
-                        <feMergeNode/>
-                        <feMergeNode in="SourceGraphic"/>
-                      </feMerge>
-                    </filter>
-                  </defs>
+                {/* Aspect-locked container to hold image and buttons */}
+                <div className="relative aspect-square h-full max-w-full mx-auto z-10">
+                  {/* Human Body Image */}
+                  <img
+                    src="/tubuh.jpeg"
+                    alt="Peta Tubuh Manusia"
+                    className="w-full h-full object-cover rounded-2xl"
+                  />
 
-                  {/* Head with facial features */}
-                  <g>
-                    {/* Cranium */}
-                    <ellipse cx="100" cy="35" rx="30" ry="32" fill="url(#bodyGradient)" stroke="#60A5FA" strokeWidth="2" opacity="0.7" />
-                    {/* Face/Jaw */}
-                    <path d="M 70 45 Q 75 60 100 65 Q 125 60 130 45" fill="url(#bodyGradient)" stroke="#60A5FA" strokeWidth="2" opacity="0.7" />
-                    {/* Ears */}
-                    <ellipse cx="68" cy="40" rx="4" ry="8" fill="#3B82F6" opacity="0.4" />
-                    <ellipse cx="132" cy="40" rx="4" ry="8" fill="#3B82F6" opacity="0.4" />
-                  </g>
-
-                  {/* Neck with Adam's apple */}
-                  <g>
-                    <path d="M 88 65 L 85 85 Q 87 90 100 92 Q 113 90 115 85 L 112 65"
-                          fill="url(#muscleGradient)" stroke="#60A5FA" strokeWidth="1.5" opacity="0.6" />
-                    {/* Trapezius muscles */}
-                    <path d="M 85 85 Q 70 88 65 95" stroke="#60A5FA" strokeWidth="3" fill="none" opacity="0.4" />
-                    <path d="M 115 85 Q 130 88 135 95" stroke="#60A5FA" strokeWidth="3" fill="none" opacity="0.4" />
-                  </g>
-
-                  {/* Shoulders and Clavicle */}
-                  <g>
-                    {/* Clavicle bones */}
-                    <path d="M 100 92 Q 80 94 65 98" stroke="#93C5FD" strokeWidth="2" opacity="0.5" />
-                    <path d="M 100 92 Q 120 94 135 98" stroke="#93C5FD" strokeWidth="2" opacity="0.5" />
-                    {/* Deltoid muscles */}
-                    <ellipse cx="65" cy="105" rx="12" ry="18" fill="url(#muscleGradient)" stroke="#60A5FA" strokeWidth="1.5" opacity="0.5" />
-                    <ellipse cx="135" cy="105" rx="12" ry="18" fill="url(#muscleGradient)" stroke="#60A5FA" strokeWidth="1.5" opacity="0.5" />
-                  </g>
-
-                  {/* Torso - Upper body */}
-                  <g>
-                    {/* Rib cage */}
-                    <path d="M 65 98 Q 60 120 62 145 L 65 165 Q 70 175 100 178 Q 130 175 135 165 L 138 145 Q 140 120 135 98 Z"
-                          fill="url(#bodyGradient)" stroke="#60A5FA" strokeWidth="2" opacity="0.7" filter="url(#innerShadow)" />
-
-                    {/* Pectoral muscles */}
-                    <path d="M 75 105 Q 85 115 95 118 Q 90 125 85 128" fill="#3B82F6" opacity="0.2" />
-                    <path d="M 125 105 Q 115 115 105 118 Q 110 125 115 128" fill="#3B82F6" opacity="0.2" />
-
-                    {/* Ribs definition */}
-                    <path d="M 75 115 Q 100 117 125 115" stroke="#60A5FA" strokeWidth="0.5" opacity="0.3" />
-                    <path d="M 73 125 Q 100 127 127 125" stroke="#60A5FA" strokeWidth="0.5" opacity="0.3" />
-                    <path d="M 71 135 Q 100 137 129 135" stroke="#60A5FA" strokeWidth="0.5" opacity="0.3" />
-                    <path d="M 70 145 Q 100 147 130 145" stroke="#60A5FA" strokeWidth="0.5" opacity="0.3" />
-                    <path d="M 70 155 Q 100 157 130 155" stroke="#60A5FA" strokeWidth="0.5" opacity="0.3" />
-
-                    {/* Abs definition */}
-                    <line x1="100" y1="120" x2="100" y2="175" stroke="#60A5FA" strokeWidth="1" opacity="0.3" />
-                  </g>
-
-                  {/* Torso - Lower abdomen */}
-                  <g>
-                    <path d="M 65 175 Q 62 190 65 205 L 70 220 Q 75 228 100 230 Q 125 228 130 220 L 135 205 Q 138 190 135 175 Z"
-                          fill="url(#bodyGradient)" stroke="#60A5FA" strokeWidth="2" opacity="0.7" />
-                    {/* Obliques */}
-                    <path d="M 68 180 Q 72 195 68 205" stroke="#60A5FA" strokeWidth="1" opacity="0.3" />
-                    <path d="M 132 180 Q 128 195 132 205" stroke="#60A5FA" strokeWidth="1" opacity="0.3" />
-                  </g>
-
-                  {/* Arms - Left */}
-                  <g>
-                    {/* Upper arm (bicep/tricep) */}
-                    <path d="M 65 105 Q 52 115 48 130 Q 46 145 48 160"
-                          stroke="#60A5FA" strokeWidth="13" fill="none" strokeLinecap="round" opacity="0.6" />
-                    <path d="M 65 105 Q 52 115 48 130"
-                          stroke="#3B82F6" strokeWidth="9" fill="none" strokeLinecap="round" opacity="0.3" />
-
-                    {/* Elbow joint */}
-                    <circle cx="48" cy="160" r="6" fill="#3B82F6" opacity="0.4" />
-
-                    {/* Forearm */}
-                    <path d="M 48 160 Q 46 175 45 190 Q 44 200 45 210"
-                          stroke="#60A5FA" strokeWidth="11" fill="none" strokeLinecap="round" opacity="0.6" />
-
-                    {/* Hand */}
-                    <ellipse cx="45" cy="218" rx="7" ry="10" fill="url(#muscleGradient)" stroke="#60A5FA" strokeWidth="1" opacity="0.6" />
-                  </g>
-
-                  {/* Arms - Right */}
-                  <g>
-                    {/* Upper arm */}
-                    <path d="M 135 105 Q 148 115 152 130 Q 154 145 152 160"
-                          stroke="#60A5FA" strokeWidth="13" fill="none" strokeLinecap="round" opacity="0.6" />
-                    <path d="M 135 105 Q 148 115 152 130"
-                          stroke="#3B82F6" strokeWidth="9" fill="none" strokeLinecap="round" opacity="0.3" />
-
-                    {/* Elbow joint */}
-                    <circle cx="152" cy="160" r="6" fill="#3B82F6" opacity="0.4" />
-
-                    {/* Forearm */}
-                    <path d="M 152 160 Q 154 175 155 190 Q 156 200 155 210"
-                          stroke="#60A5FA" strokeWidth="11" fill="none" strokeLinecap="round" opacity="0.6" />
-
-                    {/* Hand */}
-                    <ellipse cx="155" cy="218" rx="7" ry="10" fill="url(#muscleGradient)" stroke="#60A5FA" strokeWidth="1" opacity="0.6" />
-                  </g>
-
-                  {/* Pelvis and Hips */}
-                  <g>
-                    <path d="M 70 230 Q 65 240 68 250 L 75 260 Q 85 265 100 265 Q 115 265 125 260 L 132 250 Q 135 240 130 230 Z"
-                          fill="url(#bodyGradient)" stroke="#60A5FA" strokeWidth="2" opacity="0.7" />
-                    {/* Hip bones */}
-                    <ellipse cx="75" cy="245" rx="8" ry="12" fill="#3B82F6" opacity="0.3" />
-                    <ellipse cx="125" cy="245" rx="8" ry="12" fill="#3B82F6" opacity="0.3" />
-                  </g>
-
-                  {/* Legs - Left */}
-                  <g>
-                    {/* Thigh (quadriceps) */}
-                    <path d="M 75 265 Q 72 285 70 305 Q 68 325 70 345"
-                          stroke="#60A5FA" strokeWidth="18" fill="none" strokeLinecap="round" opacity="0.6" />
-                    <path d="M 75 265 Q 72 285 70 305"
-                          stroke="#3B82F6" strokeWidth="14" fill="none" strokeLinecap="round" opacity="0.3" />
-
-                    {/* Knee */}
-                    <ellipse cx="70" cy="350" rx="9" ry="11" fill="#3B82F6" opacity="0.5" />
-
-                    {/* Calf */}
-                    <path d="M 70 355 Q 68 370 70 385 Q 71 398 72 410"
-                          stroke="#60A5FA" strokeWidth="14" fill="none" strokeLinecap="round" opacity="0.6" />
-                    <ellipse cx="70" cy="385" rx="8" ry="15" fill="#3B82F6" opacity="0.2" />
-
-                    {/* Ankle and Foot */}
-                    <ellipse cx="72" cy="418" rx="6" ry="8" fill="#3B82F6" opacity="0.5" />
-                    <ellipse cx="72" cy="430" rx="10" ry="14" fill="url(#muscleGradient)" stroke="#60A5FA" strokeWidth="1" opacity="0.6" />
-                  </g>
-
-                  {/* Legs - Right */}
-                  <g>
-                    {/* Thigh */}
-                    <path d="M 125 265 Q 128 285 130 305 Q 132 325 130 345"
-                          stroke="#60A5FA" strokeWidth="18" fill="none" strokeLinecap="round" opacity="0.6" />
-                    <path d="M 125 265 Q 128 285 130 305"
-                          stroke="#3B82F6" strokeWidth="14" fill="none" strokeLinecap="round" opacity="0.3" />
-
-                    {/* Knee */}
-                    <ellipse cx="130" cy="350" rx="9" ry="11" fill="#3B82F6" opacity="0.5" />
-
-                    {/* Calf */}
-                    <path d="M 130 355 Q 132 370 130 385 Q 129 398 128 410"
-                          stroke="#60A5FA" strokeWidth="14" fill="none" strokeLinecap="round" opacity="0.6" />
-                    <ellipse cx="130" cy="385" rx="8" ry="15" fill="#3B82F6" opacity="0.2" />
-
-                    {/* Ankle and Foot */}
-                    <ellipse cx="128" cy="418" rx="6" ry="8" fill="#3B82F6" opacity="0.5" />
-                    <ellipse cx="128" cy="430" rx="10" ry="14" fill="url(#muscleGradient)" stroke="#60A5FA" strokeWidth="1" opacity="0.6" />
-                  </g>
-
-                  {/* Spine */}
-                  <path d="M 100 70 L 100 230" stroke="#93C5FD" strokeWidth="2" opacity="0.3" strokeDasharray="3,2" />
-
-                  {/* Anatomical organ highlights */}
-                  <g>
-                    {/* Brain area */}
-                    <circle cx="100" cy="35" r="26" fill="none" stroke="#8B5CF6" strokeWidth="1.5" opacity="0.4" strokeDasharray="4,3">
-                      <animate attributeName="opacity" values="0.3;0.5;0.3" dur="2s" repeatCount="indefinite" />
-                    </circle>
-
-                    {/* Heart area */}
-                    <circle cx="95" cy="135" r="20" fill="none" stroke="#EF4444" strokeWidth="1.5" opacity="0.4" strokeDasharray="4,3">
-                      <animate attributeName="opacity" values="0.3;0.5;0.3" dur="1.5s" repeatCount="indefinite" />
-                    </circle>
-
-                    {/* Stomach/Digestive area */}
-                    <ellipse cx="100" cy="185" rx="22" ry="18" fill="none" stroke="#F97316" strokeWidth="1.5" opacity="0.4" strokeDasharray="4,3">
-                      <animate attributeName="opacity" values="0.3;0.5;0.3" dur="2.5s" repeatCount="indefinite" />
-                    </ellipse>
-                  </g>
-                </svg>
-
-                  {/* Clickable organ buttons */}
+                  {/* Glowing Hotspots & Labels (Visual only, pointer-events-none) */}
                   {Object.entries(organs).map(([key, organ]) => (
-                    <div key={key}>
-                      <motion.button
-                        onClick={() => setSelectedOrgan(key)}
-                        onMouseEnter={() => setHoveredOrgan(key)}
-                        onMouseLeave={() => setHoveredOrgan(null)}
-                        whileHover={{ scale: 1.15 }}
-                        whileTap={{ scale: 0.95 }}
-                        className={`absolute ${organ.position} z-20`}
+                    <div
+                      key={`visual-${key}`}
+                      className={`absolute ${organ.position} z-20 pointer-events-none`}
+                    >
+                      {/* Glowing Circular Hotspot */}
+                      <motion.div
+                        className="relative w-12 h-12 sm:w-16 sm:h-16 rounded-full border-2 transition-all flex items-center justify-center"
+                        style={{
+                          borderColor: key === 'brain' ? '#8B5CF6' : key === 'heart' ? '#EF4444' : '#F97316',
+                          backgroundColor: selectedOrgan === key || hoveredOrgan === key
+                            ? (key === 'brain' ? 'rgba(139, 92, 246, 0.2)' : key === 'heart' ? 'rgba(239, 68, 68, 0.2)' : 'rgba(249, 115, 22, 0.2)')
+                            : 'rgba(255, 255, 255, 0.1)',
+                          boxShadow: selectedOrgan === key || hoveredOrgan === key
+                            ? (key === 'brain' ? '0 0 20px rgba(139, 92, 246, 0.6)' : key === 'heart' ? '0 0 20px rgba(239, 68, 68, 0.6)' : '0 0 20px rgba(249, 115, 22, 0.6)')
+                            : 'none'
+                        }}
                       >
-                        <motion.div
-                          className={`relative bg-linear-to-br ${organ.color} p-2.5 sm:p-4 rounded-xl sm:rounded-2xl shadow-2xl ${organ.glowColor} cursor-pointer`}
-                          animate={
-                            selectedOrgan === key || hoveredOrgan === key
-                              ? {
-                                  boxShadow: [
-                                    '0 0 20px rgba(255,255,255,0.3)',
-                                    '0 0 40px rgba(255,255,255,0.5)',
-                                    '0 0 20px rgba(255,255,255,0.3)'
-                                  ]
-                                }
-                              : {}
-                          }
-                          transition={{ duration: 1, repeat: (selectedOrgan === key || hoveredOrgan === key) ? Infinity : 0 }}
-                        >
-                          <organ.icon className="w-5 h-5 sm:w-8 sm:h-8 text-white" />
+                        {/* Inner pulse point */}
+                        <div
+                          className="w-2.5 h-2.5 rounded-full"
+                          style={{
+                            backgroundColor: key === 'brain' ? '#8B5CF6' : key === 'heart' ? '#EF4444' : '#F97316'
+                          }}
+                        />
 
-                          {/* Pulse rings */}
-                          <AnimatePresence>
-                            {(selectedOrgan === key || hoveredOrgan === key) && (
-                              <>
-                                <motion.div
-                                  initial={{ scale: 1, opacity: 0.6 }}
-                                  animate={{ scale: 2.5, opacity: 0 }}
-                                  exit={{ scale: 1, opacity: 0 }}
-                                  transition={{ duration: 1.5, repeat: Infinity }}
-                                  className={`absolute inset-0 ${organ.bgColor} rounded-xl sm:rounded-2xl`}
-                                />
-                                <motion.div
-                                  initial={{ scale: 1, opacity: 0.4 }}
-                                  animate={{ scale: 2, opacity: 0 }}
-                                  exit={{ scale: 1, opacity: 0 }}
-                                  transition={{ duration: 1.5, repeat: Infinity, delay: 0.3 }}
-                                  className={`absolute inset-0 ${organ.bgColor} rounded-xl sm:rounded-2xl`}
-                                />
-                              </>
-                            )}
-                          </AnimatePresence>
-                        </motion.div>
-
-                        {/* Label */}
-                        <motion.div
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: hoveredOrgan === key ? 1 : 0, y: hoveredOrgan === key ? 0 : 10 }}
-                          className="absolute -bottom-10 left-1/2 -translate-x-1/2 bg-white px-2.5 py-0.5 sm:py-1 rounded-lg shadow-lg whitespace-nowrap"
-                        >
-                          <p className="text-xs sm:text-sm font-semibold text-gray-900">{organ.name}</p>
-                        </motion.div>
-                      </motion.button>
-
-                      {/* Connecting line to info panel */}
-                      <AnimatePresence>
-                        {selectedOrgan === key && (
-                          <motion.div
-                            initial={{ pathLength: 0, opacity: 0 }}
-                            animate={{ pathLength: 1, opacity: 0.3 }}
-                            exit={{ pathLength: 0, opacity: 0 }}
-                            transition={{ duration: 0.5 }}
-                            className="absolute top-0 left-0 w-full h-full pointer-events-none"
-                          >
-                            <svg className="w-full h-full absolute inset-0">
-                              <motion.path
-                                d="M 50% 50% L 100% 50%"
-                                stroke={organ.bgColor.replace('bg-', '#')}
-                                strokeWidth="2"
-                                fill="none"
-                                strokeDasharray="5,5"
+                        {/* Pulse rings */}
+                        <AnimatePresence>
+                          {(selectedOrgan === key || hoveredOrgan === key) && (
+                            <>
+                              <motion.div
+                                initial={{ scale: 1, opacity: 0.6 }}
+                                animate={{ scale: 1.8, opacity: 0 }}
+                                exit={{ scale: 1, opacity: 0 }}
+                                transition={{ duration: 1.5, repeat: Infinity }}
+                                className="absolute inset-0 rounded-full"
+                                style={{
+                                  border: `2px solid ${key === 'brain' ? '#8B5CF6' : key === 'heart' ? '#EF4444' : '#F97316'}`
+                                }}
                               />
-                            </svg>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
+                              <motion.div
+                                initial={{ scale: 1, opacity: 0.4 }}
+                                animate={{ scale: 1.5, opacity: 0 }}
+                                exit={{ scale: 1, opacity: 0 }}
+                                transition={{ duration: 1.5, repeat: Infinity, delay: 0.3 }}
+                                className="absolute inset-0 rounded-full"
+                                style={{
+                                  border: `1px solid ${key === 'brain' ? '#8B5CF6' : key === 'heart' ? '#EF4444' : '#F97316'}`
+                                }}
+                              />
+                            </>
+                          )}
+                        </AnimatePresence>
+                      </motion.div>
+
+                      {/* Label */}
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ 
+                          opacity: selectedOrgan === key || hoveredOrgan === key ? 1 : 0, 
+                          y: selectedOrgan === key || hoveredOrgan === key ? 0 : 10 
+                        }}
+                        className="absolute -bottom-10 left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur px-2.5 py-0.5 sm:py-1 rounded-lg shadow-lg border border-slate-100 whitespace-nowrap z-25"
+                      >
+                        <p className="text-xs font-bold text-gray-900 flex items-center gap-1.5">
+                          <span className="w-1.5 h-1.5 rounded-full" style={{
+                            backgroundColor: key === 'brain' ? '#8B5CF6' : key === 'heart' ? '#EF4444' : '#F97316'
+                          }} />
+                          {organ.name}
+                        </p>
+                      </motion.div>
                     </div>
+                  ))}
+
+                  {/* Clickable Large Zones on the photo */}
+                  {Object.entries(organs).map(([key, organ]) => (
+                    <button
+                      key={`zone-${key}`}
+                      onClick={() => {
+                        setSelectedOrgan(key);
+                        if (window.innerWidth < 1024) {
+                          setTimeout(() => {
+                            const el = document.getElementById('organ-detail-panel');
+                            if (el) {
+                              el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                            }
+                          }, 100);
+                        }
+                      }}
+                      onMouseEnter={() => setHoveredOrgan(key)}
+                      onMouseLeave={() => setHoveredOrgan(null)}
+                      style={organ.zoneStyle}
+                      className={`absolute z-30 cursor-pointer rounded-2xl border transition-all duration-300
+                        ${selectedOrgan === key 
+                          ? `${organ.selectedBg} ${organ.activeBorder} shadow-lg scale-105` 
+                          : `border-transparent ${organ.hoverBg} hover:${organ.borderColor} hover:border-dashed hover:scale-105 ${organ.outlineGlow}`
+                        }
+                      `}
+                    />
+                  ))}
+
+                  {/* Connecting line to info panel */}
+                  {Object.entries(organs).map(([key, organ]) => (
+                    <AnimatePresence key={`line-${key}`}>
+                      {selectedOrgan === key && (
+                        <motion.div
+                          initial={{ pathLength: 0, opacity: 0 }}
+                          animate={{ pathLength: 1, opacity: 0.3 }}
+                          exit={{ pathLength: 0, opacity: 0 }}
+                          transition={{ duration: 0.5 }}
+                          className="absolute top-0 left-0 w-full h-full pointer-events-none z-10"
+                        >
+                          <svg className="w-full h-full absolute inset-0">
+                            <motion.path
+                              d="M 50% 50% L 100% 50%"
+                              stroke={organ.lineColor}
+                              strokeWidth="2"
+                              fill="none"
+                              strokeDasharray="5,5"
+                            />
+                          </svg>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   ))}
 
                   {/* Scan line effect */}
                   <motion.div
-                    animate={{ y: [0, 500, 0] }}
+                    animate={{ y: [0, 650, 0] }}
                     transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                    className="absolute left-0 right-0 h-1 bg-linear-to-r from-transparent via-cyan-400 to-transparent opacity-30 pointer-events-none"
+                    className="absolute left-0 right-0 h-1 bg-linear-to-r from-transparent via-amber-500 to-transparent opacity-20 pointer-events-none"
                   />
                 </div>
               </div>

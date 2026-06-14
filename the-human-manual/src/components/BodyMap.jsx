@@ -11,7 +11,7 @@ export default function BodyMap({ setActiveSection }) {
     brain: {
       icon: Brain,
       name: "Otak",
-      position: "top-[12%] left-1/2 -translate-x-1/2",
+      position: "top-[7%] left-1/2 -translate-x-1/2 -translate-y-1/2",
       color: "from-purple-500 to-purple-700",
       glowColor: "shadow-purple-500/50",
       bgColor: "bg-purple-500",
@@ -27,7 +27,7 @@ export default function BodyMap({ setActiveSection }) {
     heart: {
       icon: Heart,
       name: "Jantung",
-      position: "top-[38%] left-1/2 -translate-x-1/2",
+      position: "top-[27%] left-[47.5%] -translate-x-1/2 -translate-y-1/2",
       color: "from-red-500 to-red-700",
       glowColor: "shadow-red-500/50",
       bgColor: "bg-red-500",
@@ -43,7 +43,7 @@ export default function BodyMap({ setActiveSection }) {
     stomach: {
       icon: Utensils,
       name: "Pencernaan",
-      position: "top-[60%] left-1/2 -translate-x-1/2",
+      position: "top-[37%] left-1/2 -translate-x-1/2 -translate-y-1/2",
       color: "from-orange-500 to-orange-700",
       glowColor: "shadow-orange-500/50",
       bgColor: "bg-orange-500",
@@ -112,7 +112,7 @@ export default function BodyMap({ setActiveSection }) {
             className="relative"
           >
             <div className="sticky top-20 sm:top-24">
-              <div className="relative h-175 bg-linear-to-br from-slate-900 via-slate-800 to-slate-900 rounded-3xl shadow-2xl p-4 sm:p-8 overflow-hidden">
+              <div className="relative h-[500px] sm:h-[650px] bg-linear-to-br from-slate-900 via-slate-800 to-slate-900 rounded-3xl shadow-2xl p-4 sm:p-6 overflow-hidden flex items-center justify-center">
                 {/* Grid background */}
                 <div className="absolute inset-0 opacity-10">
                   <div className="absolute inset-0" style={{
@@ -121,8 +121,10 @@ export default function BodyMap({ setActiveSection }) {
                   }} />
                 </div>
 
-                {/* Detailed Human Body SVG */}
-                <svg viewBox="0 0 200 500" className="w-full h-full relative z-10">
+                {/* Aspect-locked container to hold SVG and buttons */}
+                <div className="relative aspect-[2/5] h-full z-10 flex items-center justify-center">
+                  {/* Detailed Human Body SVG */}
+                  <svg viewBox="0 0 200 500" className="w-full h-full relative z-10">
                   <defs>
                     <linearGradient id="bodyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
                       <stop offset="0%" stopColor="#60A5FA" stopOpacity="0.4" />
@@ -319,98 +321,99 @@ export default function BodyMap({ setActiveSection }) {
                   </g>
                 </svg>
 
-                {/* Clickable organ buttons */}
-                {Object.entries(organs).map(([key, organ]) => (
-                  <div key={key}>
-                    <motion.button
-                      onClick={() => setSelectedOrgan(key)}
-                      onMouseEnter={() => setHoveredOrgan(key)}
-                      onMouseLeave={() => setHoveredOrgan(null)}
-                      whileHover={{ scale: 1.15 }}
-                      whileTap={{ scale: 0.95 }}
-                      className={`absolute ${organ.position} z-20`}
-                    >
-                      <motion.div
-                        className={`relative bg-linear-to-br ${organ.color} p-5 rounded-2xl shadow-2xl ${organ.glowColor} cursor-pointer`}
-                        animate={
-                          selectedOrgan === key || hoveredOrgan === key
-                            ? {
-                                boxShadow: [
-                                  '0 0 20px rgba(255,255,255,0.3)',
-                                  '0 0 40px rgba(255,255,255,0.5)',
-                                  '0 0 20px rgba(255,255,255,0.3)'
-                                ]
-                              }
-                            : {}
-                        }
-                        transition={{ duration: 1, repeat: (selectedOrgan === key || hoveredOrgan === key) ? Infinity : 0 }}
+                  {/* Clickable organ buttons */}
+                  {Object.entries(organs).map(([key, organ]) => (
+                    <div key={key}>
+                      <motion.button
+                        onClick={() => setSelectedOrgan(key)}
+                        onMouseEnter={() => setHoveredOrgan(key)}
+                        onMouseLeave={() => setHoveredOrgan(null)}
+                        whileHover={{ scale: 1.15 }}
+                        whileTap={{ scale: 0.95 }}
+                        className={`absolute ${organ.position} z-20`}
                       >
-                        <organ.icon className="w-10 h-10 text-white" />
-
-                        {/* Pulse rings */}
-                        <AnimatePresence>
-                          {(selectedOrgan === key || hoveredOrgan === key) && (
-                            <>
-                              <motion.div
-                                initial={{ scale: 1, opacity: 0.6 }}
-                                animate={{ scale: 2.5, opacity: 0 }}
-                                exit={{ scale: 1, opacity: 0 }}
-                                transition={{ duration: 1.5, repeat: Infinity }}
-                                className={`absolute inset-0 ${organ.bgColor} rounded-2xl`}
-                              />
-                              <motion.div
-                                initial={{ scale: 1, opacity: 0.4 }}
-                                animate={{ scale: 2, opacity: 0 }}
-                                exit={{ scale: 1, opacity: 0 }}
-                                transition={{ duration: 1.5, repeat: Infinity, delay: 0.3 }}
-                                className={`absolute inset-0 ${organ.bgColor} rounded-2xl`}
-                              />
-                            </>
-                          )}
-                        </AnimatePresence>
-                      </motion.div>
-
-                      {/* Label */}
-                      <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: hoveredOrgan === key ? 1 : 0, y: hoveredOrgan === key ? 0 : 10 }}
-                        className="absolute -bottom-12 left-1/2 -translate-x-1/2 bg-white px-3 py-1 rounded-lg shadow-lg whitespace-nowrap"
-                      >
-                        <p className="text-sm font-semibold text-gray-900">{organ.name}</p>
-                      </motion.div>
-                    </motion.button>
-
-                    {/* Connecting line to info panel */}
-                    <AnimatePresence>
-                      {selectedOrgan === key && (
                         <motion.div
-                          initial={{ pathLength: 0, opacity: 0 }}
-                          animate={{ pathLength: 1, opacity: 0.3 }}
-                          exit={{ pathLength: 0, opacity: 0 }}
-                          transition={{ duration: 0.5 }}
-                          className="absolute top-0 left-0 w-full h-full pointer-events-none"
+                          className={`relative bg-linear-to-br ${organ.color} p-2.5 sm:p-4 rounded-xl sm:rounded-2xl shadow-2xl ${organ.glowColor} cursor-pointer`}
+                          animate={
+                            selectedOrgan === key || hoveredOrgan === key
+                              ? {
+                                  boxShadow: [
+                                    '0 0 20px rgba(255,255,255,0.3)',
+                                    '0 0 40px rgba(255,255,255,0.5)',
+                                    '0 0 20px rgba(255,255,255,0.3)'
+                                  ]
+                                }
+                              : {}
+                          }
+                          transition={{ duration: 1, repeat: (selectedOrgan === key || hoveredOrgan === key) ? Infinity : 0 }}
                         >
-                          <svg className="w-full h-full absolute inset-0">
-                            <motion.path
-                              d="M 50% 50% L 100% 50%"
-                              stroke={organ.bgColor.replace('bg-', '#')}
-                              strokeWidth="2"
-                              fill="none"
-                              strokeDasharray="5,5"
-                            />
-                          </svg>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                ))}
+                          <organ.icon className="w-5 h-5 sm:w-8 sm:h-8 text-white" />
 
-                {/* Scan line effect */}
-                <motion.div
-                  animate={{ y: [0, 700, 0] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                  className="absolute left-0 right-0 h-1 bg-linear-to-r from-transparent via-cyan-400 to-transparent opacity-30 pointer-events-none"
-                />
+                          {/* Pulse rings */}
+                          <AnimatePresence>
+                            {(selectedOrgan === key || hoveredOrgan === key) && (
+                              <>
+                                <motion.div
+                                  initial={{ scale: 1, opacity: 0.6 }}
+                                  animate={{ scale: 2.5, opacity: 0 }}
+                                  exit={{ scale: 1, opacity: 0 }}
+                                  transition={{ duration: 1.5, repeat: Infinity }}
+                                  className={`absolute inset-0 ${organ.bgColor} rounded-xl sm:rounded-2xl`}
+                                />
+                                <motion.div
+                                  initial={{ scale: 1, opacity: 0.4 }}
+                                  animate={{ scale: 2, opacity: 0 }}
+                                  exit={{ scale: 1, opacity: 0 }}
+                                  transition={{ duration: 1.5, repeat: Infinity, delay: 0.3 }}
+                                  className={`absolute inset-0 ${organ.bgColor} rounded-xl sm:rounded-2xl`}
+                                />
+                              </>
+                            )}
+                          </AnimatePresence>
+                        </motion.div>
+
+                        {/* Label */}
+                        <motion.div
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: hoveredOrgan === key ? 1 : 0, y: hoveredOrgan === key ? 0 : 10 }}
+                          className="absolute -bottom-10 left-1/2 -translate-x-1/2 bg-white px-2.5 py-0.5 sm:py-1 rounded-lg shadow-lg whitespace-nowrap"
+                        >
+                          <p className="text-xs sm:text-sm font-semibold text-gray-900">{organ.name}</p>
+                        </motion.div>
+                      </motion.button>
+
+                      {/* Connecting line to info panel */}
+                      <AnimatePresence>
+                        {selectedOrgan === key && (
+                          <motion.div
+                            initial={{ pathLength: 0, opacity: 0 }}
+                            animate={{ pathLength: 1, opacity: 0.3 }}
+                            exit={{ pathLength: 0, opacity: 0 }}
+                            transition={{ duration: 0.5 }}
+                            className="absolute top-0 left-0 w-full h-full pointer-events-none"
+                          >
+                            <svg className="w-full h-full absolute inset-0">
+                              <motion.path
+                                d="M 50% 50% L 100% 50%"
+                                stroke={organ.bgColor.replace('bg-', '#')}
+                                strokeWidth="2"
+                                fill="none"
+                                strokeDasharray="5,5"
+                              />
+                            </svg>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  ))}
+
+                  {/* Scan line effect */}
+                  <motion.div
+                    animate={{ y: [0, 500, 0] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                    className="absolute left-0 right-0 h-1 bg-linear-to-r from-transparent via-cyan-400 to-transparent opacity-30 pointer-events-none"
+                  />
+                </div>
               </div>
             </div>
           </motion.div>
@@ -420,7 +423,7 @@ export default function BodyMap({ setActiveSection }) {
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="lg:min-h-175"
+            className="lg:min-h-[650px]"
           >
             <AnimatePresence mode="wait">
               {selectedOrgan ? (

@@ -159,17 +159,18 @@ export default function ComparisonTool() {
           ))}
         </div>
 
-        {/* Comparison Table */}
+        {/* Comparison Table & Mobile Cards */}
         <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
-          <div className="overflow-x-auto">
+          {/* Desktop Table View */}
+          <div className="hidden md:block overflow-x-auto">
             <table className="w-full">
               <thead>
                 <tr className="bg-linear-to-r from-amber-600 to-orange-600 text-white">
                   <th className="px-6 py-4 text-left font-semibold">Minuman</th>
                   <th className="px-6 py-4 text-center font-semibold">Kafein (mg)</th>
                   <th className="px-6 py-4 text-center font-semibold">Porsi</th>
-                  <th className="px-6 py-4 text-left font-semibold hidden md:table-cell">Kelebihan</th>
-                  <th className="px-6 py-4 text-left font-semibold hidden md:table-cell">Kekurangan</th>
+                  <th className="px-6 py-4 text-left font-semibold">Kelebihan</th>
+                  <th className="px-6 py-4 text-left font-semibold">Kekurangan</th>
                 </tr>
               </thead>
               <tbody>
@@ -200,10 +201,10 @@ export default function ComparisonTool() {
                       <td className="px-6 py-5 text-center text-sm text-gray-600">
                         {drink.serving}
                       </td>
-                      <td className="px-6 py-5 text-sm text-gray-600 hidden md:table-cell">
+                      <td className="px-6 py-5 text-sm text-gray-600">
                         <span className="text-green-600">✓</span> {drink.pros}
                       </td>
-                      <td className="px-6 py-5 text-sm text-gray-600 hidden md:table-cell">
+                      <td className="px-6 py-5 text-sm text-gray-600">
                         <span className="text-red-600">✗</span> {drink.cons}
                       </td>
                     </motion.tr>
@@ -213,28 +214,70 @@ export default function ComparisonTool() {
             </table>
           </div>
 
+          {/* Mobile Card List View */}
+          <div className="block md:hidden divide-y divide-gray-100">
+            {selectedDrinks.map((drinkId, index) => {
+              const drink = drinks[drinkId];
+              return (
+                <motion.div
+                  key={drinkId}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  className="p-5 flex flex-col gap-3 hover:bg-amber-50/50 transition-colors"
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className={`${drink.color} w-10 h-10 rounded-lg flex items-center justify-center`}>
+                        <drink.icon className="w-5 h-5 text-white" />
+                      </div>
+                      <span className="font-bold text-gray-900 text-sm">{drink.name}</span>
+                    </div>
+                    <div className="text-right">
+                      <span className="text-xl font-bold text-amber-700">{drink.caffeine}</span>
+                      <span className="text-xs text-gray-500 ml-1">mg</span>
+                      <p className="text-[10px] text-gray-400">Porsi: {drink.serving}</p>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-1 gap-2 text-xs bg-gray-50 p-3 rounded-xl border border-gray-100">
+                    <div className="flex items-start gap-2 text-gray-700">
+                      <span className="text-green-600 font-bold">✓</span>
+                      <span><strong>Kelebihan:</strong> {drink.pros}</span>
+                    </div>
+                    <div className="flex items-start gap-2 text-gray-700">
+                      <span className="text-red-600 font-bold">✗</span>
+                      <span><strong>Kekurangan:</strong> {drink.cons}</span>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+
           {/* Visual Comparison */}
-          <div className="p-6 bg-gray-50">
-            <h4 className="font-semibold text-gray-900 mb-4 text-center">Perbandingan Visual</h4>
-            <div className="flex items-end justify-around gap-4 h-48">
+          <div className="p-4 sm:p-6 bg-gray-50 border-t border-gray-100">
+            <h4 className="font-semibold text-gray-900 mb-4 text-center text-sm sm:text-base">Perbandingan Visual</h4>
+            <div className="flex items-end justify-around gap-2 sm:gap-4 h-36 sm:h-48 pt-6">
               {selectedDrinks.map(drinkId => {
                 const drink = drinks[drinkId];
                 const maxCaffeine = Math.max(...selectedDrinks.map(id => drinks[id].caffeine));
                 const height = (drink.caffeine / maxCaffeine) * 100;
 
                 return (
-                  <div key={drinkId} className="flex-1 flex flex-col items-center">
+                  <div key={drinkId} className="flex-1 flex flex-col items-center min-w-0">
                     <motion.div
                       initial={{ height: 0 }}
                       animate={{ height: `${height}%` }}
                       transition={{ duration: 0.8, delay: 0.2 }}
                       className={`w-full ${drink.color} rounded-t-lg relative min-h-5`}
                     >
-                      <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-white px-2 py-1 rounded shadow text-sm font-bold text-gray-900 whitespace-nowrap">
+                      <div className="absolute -top-7 left-1/2 -translate-x-1/2 bg-white px-1 sm:px-2 py-0.5 sm:py-1 rounded shadow text-[10px] sm:text-xs font-bold text-gray-900 whitespace-nowrap border border-gray-100">
                         {drink.caffeine}mg
                       </div>
                     </motion.div>
-                    <p className="text-xs font-semibold text-gray-700 mt-2 text-center">{drink.name}</p>
+                    <p className="text-[10px] sm:text-xs font-semibold text-gray-700 mt-2 text-center truncate w-full" title={drink.name}>
+                      {drink.name}
+                    </p>
                   </div>
                 );
               })}

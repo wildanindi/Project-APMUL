@@ -189,7 +189,7 @@ export default function InteractiveTimeline() {
       {/* Timeline */}
       <div className="relative max-w-4xl mx-auto z-20">
         {/* Animated Line */}
-        <div className="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 hidden md:block">
+        <div className="absolute left-8 md:left-1/2 top-0 bottom-0 -translate-x-1/2">
           <motion.div
             className="w-1 h-full bg-gradient-to-b from-transparent via-amber-400 to-transparent"
             animate={{
@@ -232,7 +232,7 @@ export default function InteractiveTimeline() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.15, duration: 0.6 }}
-              className={`flex items-center gap-8 ${
+              className={`flex flex-row gap-6 md:gap-8 items-start md:items-center relative pl-20 md:pl-0 ${
                 index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
               }`}
             >
@@ -252,7 +252,7 @@ export default function InteractiveTimeline() {
                   <div className="absolute inset-0 bg-gradient-to-r from-amber-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   
                   <div className="relative z-10">
-                    <div className="flex items-center gap-3 mb-3" style={{ justifyContent: index % 2 === 0 ? 'flex-end' : 'flex-start' }}>
+                    <div className={`flex items-center gap-3 mb-3 ${index % 2 === 0 ? 'md:justify-end' : 'md:justify-start'}`}>
                       <motion.span
                         animate={{
                           scale: activeStep === index ? [1, 1.05, 1] : 1,
@@ -266,34 +266,36 @@ export default function InteractiveTimeline() {
                         {step.time}
                       </motion.span>
                     </div>
-                    <h4 className="text-2xl font-bold text-gray-900 mb-2">{step.title}</h4>
-                    <p className="text-gray-600 leading-relaxed">{step.description}</p>
+                    <h4 className="text-2xl font-bold text-gray-900 mb-2 text-left md:text-inherit">{step.title}</h4>
+                    <p className="text-gray-600 leading-relaxed text-left md:text-inherit">{step.description}</p>
 
                     {/* Play button */}
-                    <motion.button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handlePlayVideo(index);
-                      }}
-                      whileHover={{ scale: 1.1, boxShadow: '0 10px 25px rgba(139, 92, 246, 0.4)' }}
-                      whileTap={{ scale: 0.95 }}
-                      className="mt-4 inline-flex items-center gap-2 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white px-5 py-2 rounded-full text-sm font-bold shadow-lg hover:shadow-xl transition-all relative overflow-hidden group/btn"
-                    >
-                      <motion.div
-                        className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-red-600"
-                        initial={{ x: '-100%' }}
-                        whileHover={{ x: '100%' }}
-                        transition={{ duration: 0.5 }}
-                      />
-                      <Play className="w-4 h-4 relative z-10" />
-                      <span className="relative z-10">Lihat Ilustrasi</span>
-                    </motion.button>
+                    <div className="text-left md:text-inherit">
+                      <motion.button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handlePlayVideo(index);
+                        }}
+                        whileHover={{ scale: 1.1, boxShadow: '0 10px 25px rgba(139, 92, 246, 0.4)' }}
+                        whileTap={{ scale: 0.95 }}
+                        className="mt-4 inline-flex items-center gap-2 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white px-5 py-2 rounded-full text-sm font-bold shadow-lg hover:shadow-xl transition-all relative overflow-hidden group/btn"
+                      >
+                        <motion.div
+                          className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-red-600"
+                          initial={{ x: '-100%' }}
+                          whileHover={{ x: '100%' }}
+                          transition={{ duration: 0.5 }}
+                        />
+                        <Play className="w-4 h-4 relative z-10" />
+                        <span className="relative z-10">Lihat Ilustrasi</span>
+                      </motion.button>
+                    </div>
                   </div>
                 </motion.button>
               </div>
 
               {/* Icon with enhanced effects */}
-              <div className="relative shrink-0 z-10">
+              <div className="absolute left-0 top-6 md:relative md:top-auto md:left-auto shrink-0 z-10">
                 <motion.div
                   whileHover={{ scale: 1.25, rotate: 10 }}
                   whileTap={{ scale: 0.95 }}

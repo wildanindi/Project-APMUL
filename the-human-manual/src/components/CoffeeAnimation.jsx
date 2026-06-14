@@ -3,7 +3,7 @@ import { Coffee } from 'lucide-react';
 
 export default function CoffeeAnimation() {
   return (
-    <div className="relative w-32 h-32">
+    <div className="relative w-full h-full">
       {/* Coffee Cup */}
       <motion.div
         animate={{
@@ -14,9 +14,9 @@ export default function CoffeeAnimation() {
           repeat: Infinity,
           ease: "easeInOut"
         }}
-        className="relative z-10"
+        className="relative z-10 w-full h-full"
       >
-        <Coffee className="w-32 h-32 text-amber-700" />
+        <Coffee className="w-full h-full text-amber-700" />
       </motion.div>
 
       {/* Steam */}

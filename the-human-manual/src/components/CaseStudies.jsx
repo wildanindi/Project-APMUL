@@ -372,8 +372,52 @@ export default function CaseStudies({ setActiveSection }) {
         </div>
 
         <div className="grid lg:grid-cols-3 gap-6">
+          {/* Mobile Horizontal Selector */}
+          <div className="lg:hidden w-full mb-2">
+            <div className="flex gap-3 overflow-x-auto pb-4 px-1 scrollbar-hide snap-x snap-mandatory">
+              {filteredCases.map((caseItem) => {
+                const idx = cases.indexOf(caseItem);
+                const isActive = activeCase === idx;
+                const isDone = completedCases.has(idx);
+                return (
+                  <button
+                    key={idx}
+                    onClick={() => switchCase(idx)}
+                    className={`snap-center shrink-0 w-60 text-left p-3.5 rounded-xl bg-white shadow-md border-2 transition-all ${
+                      isActive 
+                        ? "border-amber-500 ring-2 ring-amber-500/20" 
+                        : "border-gray-100 hover:border-amber-200"
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className={`p-2 rounded-lg bg-linear-to-br ${caseItem.color} shrink-0`}>
+                        <caseItem.icon className="w-4 h-4 text-white" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-1 mb-0.5">
+                          <span className="font-bold text-gray-800 text-sm truncate">
+                            {caseItem.title}
+                          </span>
+                          {isDone && (
+                            <CheckCircle className="w-3.5 h-3.5 text-green-500 shrink-0" />
+                          )}
+                        </div>
+                        <div className="flex items-center justify-between mt-1">
+                          <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-semibold ${caseItem.categoryColor}`}>
+                            {caseItem.category}
+                          </span>
+                          <span className="text-[9px] text-gray-400">📍 {caseItem.location}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
           {/* Case List Sidebar */}
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-1 hidden lg:block">
             <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
               <div className="p-4 border-b border-gray-100">
                 <h3 className="font-semibold text-gray-800 text-sm">

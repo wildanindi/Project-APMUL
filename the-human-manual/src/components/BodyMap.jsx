@@ -78,7 +78,7 @@ export default function BodyMap({ setActiveSection }) {
   }, [setActiveSection]);
 
   return (
-    <section id="body-map" ref={sectionRef} className="relative min-h-screen py-16 sm:py-24 px-4 sm:px-6 bg-linear-to-b from-white to-amber-50 overflow-hidden">
+    <section id="body-map" ref={sectionRef} className="relative min-h-screen py-16 sm:py-24 px-4 sm:px-6 bg-linear-to-b from-white to-amber-50 overflow-hidden scroll-mt-20">
       {/* Background decorations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-10 sm:top-20 left-5 sm:left-10 w-40 h-40 sm:w-72 sm:h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" />

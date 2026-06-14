@@ -18,6 +18,7 @@ export default function BodyMap({ setActiveSection }) {
       lineColor: "#8B5CF6",
       glowBg: "rgba(139, 92, 246, 0.2)",
       glowShadow: "0 0 20px rgba(139, 92, 246, 0.6)",
+      imagePath: "/otak.jpg",
       effects: [
         "Meningkatkan kewaspadaan dan konsentrasi",
         "Menghambat reseptor adenosin (molekul pembawa kantuk)",
@@ -43,6 +44,7 @@ export default function BodyMap({ setActiveSection }) {
       lineColor: "#EF4444",
       glowBg: "rgba(239, 68, 68, 0.2)",
       glowShadow: "0 0 20px rgba(239, 68, 68, 0.6)",
+      imagePath: "/jantung.jpg",
       effects: [
         "Meningkatkan detak jantung sementara",
         "Meningkatkan tekanan darah ringan",
@@ -68,6 +70,7 @@ export default function BodyMap({ setActiveSection }) {
       lineColor: "#14B8A6",
       glowBg: "rgba(20, 184, 166, 0.2)",
       glowShadow: "0 0 20px rgba(20, 184, 166, 0.6)",
+      imagePath: "/hati.jpg",
       effects: [
         "Tempat utama metabolisme kafein oleh enzim sitokrom P450 (CYP1A2)",
         "Konsumsi kopi secara teratur menurunkan risiko fibrosis dan sirosis hati",
@@ -93,6 +96,7 @@ export default function BodyMap({ setActiveSection }) {
       lineColor: "#3B82F6",
       glowBg: "rgba(59, 130, 246, 0.2)",
       glowShadow: "0 0 20px rgba(59, 130, 246, 0.6)",
+      imagePath: "/ginjal.jpg",
       effects: [
         "Menghambat reseptor adenosin di ginjal, memicu efek diuretik (sering buang air kecil)",
         "Meningkatkan laju filtrasi darah (GFR) di ginjal secara sementara",
@@ -118,6 +122,7 @@ export default function BodyMap({ setActiveSection }) {
       lineColor: "#F97316",
       glowBg: "rgba(249, 115, 22, 0.2)",
       glowShadow: "0 0 20px rgba(249, 115, 22, 0.6)",
+      imagePath: "/sistem pencernaan.jpg",
       effects: [
         "Kafein diserap di usus halus dalam 45 menit",
         "Merangsang produksi asam lambung",
@@ -366,11 +371,21 @@ export default function BodyMap({ setActiveSection }) {
                   <div className="flex items-start justify-between mb-8">
                     <div className="flex-1">
                       <div className="flex items-center gap-4 mb-3">
-                        <div className={`bg-linear-to-br ${organs[selectedOrgan].color} p-4 rounded-2xl shadow-lg`}>
-                          {(() => {
-                            const Icon = organs[selectedOrgan].icon;
-                            return <Icon className="w-10 h-10 text-white" />;
-                          })()}
+                        <div className="relative shrink-0">
+                          <div className="w-20 h-20 rounded-2xl overflow-hidden shadow-md border border-slate-200 bg-slate-50">
+                            <img 
+                              src={organs[selectedOrgan].imagePath} 
+                              alt={organs[selectedOrgan].name} 
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                          {/* Mini icon badge */}
+                          <div className={`absolute -bottom-1 -right-1 bg-linear-to-br ${organs[selectedOrgan].color} p-1.5 rounded-lg shadow-md border border-white`}>
+                            {(() => {
+                              const Icon = organs[selectedOrgan].icon;
+                              return <Icon className="w-3.5 h-3.5 text-white" />;
+                            })()}
+                          </div>
                         </div>
                         <div>
                           <h3 className="text-3xl font-bold text-gray-900">

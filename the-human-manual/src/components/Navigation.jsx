@@ -7,10 +7,21 @@ export default function Navigation({ activeSection }) {
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    
+    if (mobileMenuOpen) {
+      // Mobile: Close menu first, then scroll after transition finishes
+      setMobileMenuOpen(false);
+      setTimeout(() => {
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 300);
+    } else {
+      // Desktop: Scroll instantly
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
-    setMobileMenuOpen(false);
   };
 
   const navItems = [
@@ -52,7 +63,8 @@ export default function Navigation({ activeSection }) {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2"
+          className="md:hidden p-2 cursor-pointer relative z-50"
+          aria-label="Toggle menu"
         >
           {mobileMenuOpen ? (
             <X className="w-6 h-6 text-amber-700" />
@@ -69,14 +81,15 @@ export default function Navigation({ activeSection }) {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white border-t border-gray-200"
+            transition={{ duration: 0.25, ease: 'easeInOut' }}
+            className="md:hidden bg-white border-t border-gray-200 overflow-hidden"
           >
             <div className="px-4 py-4 space-y-2">
               {navItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
+                  className={`w-full text-left px-4 py-3 rounded-lg transition-colors cursor-pointer ${
                     activeSection === item.id
                       ? 'bg-amber-100 text-amber-700 font-semibold'
                       : 'text-gray-600 hover:bg-amber-50 hover:text-amber-600'

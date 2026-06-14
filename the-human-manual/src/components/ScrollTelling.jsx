@@ -46,7 +46,7 @@ export default function ScrollTelling({ setActiveSection }) {
   ];
 
   return (
-    <section id="how-it-works" ref={sectionRef} className="relative min-h-screen py-16 sm:py-24 px-4 sm:px-6">
+    <section id="how-it-works" ref={sectionRef} className="relative min-h-screen py-16 sm:py-24 px-4 sm:px-6 scroll-mt-20">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

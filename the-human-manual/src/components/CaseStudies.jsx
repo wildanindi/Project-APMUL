@@ -316,7 +316,7 @@ export default function CaseStudies({ setActiveSection }) {
   const currentFilteredIndex = filteredCases.indexOf(currentCase);
 
   return (
-    <section id="cases" ref={sectionRef} className="relative py-16 sm:py-24 px-4 sm:px-6 bg-linear-to-b from-amber-50 to-white overflow-hidden">
+    <section id="cases" ref={sectionRef} className="relative py-16 sm:py-24 px-4 sm:px-6 bg-linear-to-b from-amber-50 to-white overflow-hidden scroll-mt-20">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-10 sm:top-20 right-5 sm:right-10 w-48 h-48 sm:w-96 sm:h-96 bg-amber-100 rounded-full opacity-30 blur-3xl" />
